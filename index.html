@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>C&SB Capital and Social Bond Platform Simulation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>C&SB Capital and Social Bond</h1>
+    <p>Master Operating Platform and Core Ledger Simulation</p>
+  </header>
+
+  <main class="grid-container">
+    <section class="card full-width">
+      <h2>System Core State</h2>
+      <div class="metrics-grid">
+        <div class="metric">
+          <span class="label">Service Fee Revenue</span>
+          <span id="sys-service-revenue" class="val">$0.00</span>
+        </div>
+        <div class="metric">
+          <span class="label">Withdrawal Fee Revenue</span>
+          <span id="sys-withdraw-revenue" class="val">$0.00</span>
+        </div>
+        <div class="metric">
+          <span class="label">Broker Rebates</span>
+          <span id="sys-rebates" class="val">$0.00</span>
+        </div>
+        <div class="metric">
+          <span class="label">SB Protocol Share</span>
+          <span id="sys-sb-revenue" class="val">$0.00</span>
+        </div>
+        <div class="metric">
+          <span class="label">Active Account Equity</span>
+          <span id="sys-equity" class="val">$0.00</span>
+        </div>
+        <div class="metric">
+          <span class="label">Bonder Liens</span>
+          <span id="sys-liens" class="val">$0.00</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>1 Capital Purchase Engine</h2>
+      <form id="capital-form">
+        <label for="user-name">Trader Name</label>
+        <input type="text" id="user-name" value="Trader Alex" required>
+        
+        <label for="account-price">Account Capital Size</label>
+        <input type="number" id="account-price" value="10000" step="1000" required>
+
+        <label for="purchase-type">Purchase Method</label>
+        <select id="purchase-type">
+          <option value="direct">Direct Purchase</option>
+          <option value="installment">Installment Purchase</option>
+        </select>
+
+        <button type="submit" class="btn-primary">Buy Account</button>
+      </form>
+
+      <div id="capital-status" class="status-box">No active purchase</div>
+
+      <div class="control-group">
+        <label for="installment-pay-amt">Installment Payment Amount</label>
+        <input type="number" id="installment-pay-amt" value="2525">
+        <button id="btn-pay-installment" class="btn-secondary" disabled>Submit Payment</button>
+      </div>
+
+      <div class="control-group">
+        <label for="withdraw-amt">Profit Withdrawal Amount</label>
+        <input type="number" id="withdraw-amt" value="1000">
+        <button id="btn-withdraw" class="btn-success" disabled>Request Withdrawal</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2 Reciprocal Management and Trading</h2>
+      <div id="management-status" class="status-box">No assigned account</div>
+
+      <div class="control-group">
+        <button id="btn-assign-submanager" class="btn-secondary" disabled>Delegate to Submanager</button>
+      </div>
+
+      <div class="control-group">
+        <label for="lots-traded">Traded Lots</label>
+        <input type="number" id="lots-traded" value="10" min="1">
+        <label for="trade-pct">Trade Return Percent</label>
+        <input type="number" id="trade-pct" value="-50" min="-90" max="50">
+        <button id="btn-run-trade" class="btn-danger" disabled>Execute Trade</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3 Social Bond Facility</h2>
+      <div id="sb-status" class="status-box">Social Bond inactive</div>
+      <button id="btn-trigger-sb" class="btn-warning" disabled>Activate Social Bond</button>
+      <button id="btn-expire-sb" class="btn-danger" disabled>Expire 30 Day Contract</button>
+    </section>
+
+    <section class="card">
+      <h2>4 Revenue Intercept Engine</h2>
+      <label for="intercept-source">Revenue Source</label>
+      <select id="intercept-source">
+        <option value="Channel 1 Primary Account Share">Channel 1 Primary Account Share</option>
+        <option value="Channel 2 Sub Account 1 Share">Channel 2 Sub Account 1 Share</option>
+        <option value="Channel 3 Sub Account 2 Share">Channel 3 Sub Account 2 Share</option>
+        <option value="Channel 4 Sub Account 3 Share">Channel 4 Sub Account 3 Share</option>
+        <option value="Channel 5 Sub Account 4 Share">Channel 5 Sub Account 4 Share</option>
+        <option value="Channel 6 Referral Income">Channel 6 Referral Income</option>
+        <option value="Channel 7 SB Bonding Income">Channel 7 SB Bonding Income</option>
+      </select>
+
+      <label for="intercept-amount">Earnings Amount</label>
+      <input type="number" id="intercept-amount" value="500">
+
+      <button id="btn-process-intercept" class="btn-success" disabled>Intercept Earnings</button>
+      <div id="intercept-status" class="status-box">Intercept inactive</div>
+    </section>
+
+    <section class="card full-width">
+      <h2>5 Bonder Network State</h2>
+      <div id="bonders-list" class="bonders-grid"></div>
+    </section>
+
+    <section class="card full-width">
+      <h2>Master Ledger Audit Log</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Tx ID</th>
+              <th>Timestamp</th>
+              <th>From Account</th>
+              <th>To Account</th>
+              <th>Amount</th>
+              <th>Details</th>
+            </tr>
+          </thead>
+          <tbody id="ledger-rows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
