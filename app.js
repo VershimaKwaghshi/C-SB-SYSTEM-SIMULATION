@@ -1,106 +1,112 @@
-let selectedTier = {
-  size: 50000,
-  fee: 500
-}
+const managersData = [
+  { id: 1, name: "Apex Alpha", channel: "alpha", channelName: "4. High-Alpha", roi: "+142.5%", winRate: "78%", assets: "$1.2M", investors: 342 },
+  { id: 2, name: "SafeHaven Macro", channel: "conservative", channelName: "1. Conservative", roi: "+24.1%", winRate: "89%", assets: "$4.5M", investors: 812 },
+  { id: 3, name: "Equinox Balanced", channel: "balanced", channelName: "2. Balanced", roi: "+58.3%", winRate: "72%", assets: "$2.1M", investors: 490 },
+  { id: 4, name: "Crypto Pulse", channel: "crypto", channelName: "5. Crypto", roi: "+210.8%", winRate: "65%", assets: "$980K", investors: 512 },
+  { id: 5, name: "FX Velocity", channel: "forex", channelName: "6. Forex", roi: "+88.4%", winRate: "81%", assets: "$1.8M", investors: 295 },
+  { id: 6, name: "Social Bond Pool A", channel: "social", channelName: "7. Social Bond", roi: "+45.0%", winRate: "94%", assets: "$3.4M", investors: 1200 },
+  { id: 7, name: "Quantum Growth", channel: "growth", channelName: "3. Growth", roi: "+95.2%", winRate: "74%", assets: "$1.5M", investors: 388 }
+]
 
 const elements = {
-  btnOpenSignup: document.getElementById('btn-open-signup'),
-  btnHeroSignup: document.getElementById('btn-hero-signup'),
-  btnCloseSignup: document.getElementById('btn-close-signup'),
-  modalSignup: document.getElementById('modal-signup'),
-  
-  btnTypeIndividual: document.getElementById('btn-type-individual'),
-  btnTypeBusiness: document.getElementById('btn-type-business'),
-  formSignup: document.getElementById('form-signup'),
-
-  modalPurchase: document.getElementById('modal-purchase'),
-  btnClosePurchase: document.getElementById('btn-close-purchase'),
-  btnConfirmPurchase: document.getElementById('btn-confirm-purchase'),
-  modalTierSize: document.getElementById('modal-tier-size'),
-  modalTierFee: document.getElementById('modal-tier-fee'),
-  modalTotalDue: document.getElementById('modal-total-due'),
-  activeAccountSize: document.getElementById('active-account-size')
+  managersGrid: document.getElementById('managers-grid'),
+  modalAllocate: document.getElementById('modal-allocate'),
+  btnCloseAllocate: document.getElementById('btn-close-allocate'),
+  btnConfirmAllocate: document.getElementById('btn-confirm-allocate'),
+  modalManagerName: document.getElementById('modal-manager-name'),
+  modalManagerChannel: document.getElementById('modal-manager-channel')
 }
 
 function init() {
+  renderManagers('all')
   setupEventListeners()
 }
 
-function setupEventListeners() {
-  // Signup Modal Triggers
-  if (elements.btnOpenSignup) elements.btnOpenSignup.addEventListener('click', openSignupModal)
-  if (elements.btnHeroSignup) elements.btnHeroSignup.addEventListener('click', openSignupModal)
-  if (elements.btnCloseSignup) elements.btnCloseSignup.addEventListener('click', closeSignupModal)
+function renderManagers(filterChannel) {
+  if (!elements.managersGrid) return
+  elements.managersGrid.innerHTML = ''
 
-  // Purchase Modal Triggers
-  if (elements.btnClosePurchase) elements.btnClosePurchase.addEventListener('click', closePurchaseModal)
+  const filtered = filterChannel === 'all' 
+    ? managersData 
+    : managersData.filter(m => m.channel === filterChannel)
 
-  // Tier Selection Buttons
-  const tierButtons = document.querySelectorAll('.btn-select-tier')
-  tierButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-      const size = e.target.getAttribute('data-size')
-      const fee = e.target.getAttribute('data-fee')
+  filtered.forEach(manager => {
+    const card = document.createElement('div')
+    card.className = 'manager-card'
+    card.innerHTML = `
+      <div class="manager-header">
+        <div class="manager-info">
+          <h3>${manager.name}</h3>
+          <div class="manager-channel-tag">${manager.channelName}</div>
+        </div>
+      </div>
+      <div class="manager-stats">
+        <div class="stat-box">
+          <span class="stat-label">Total ROI</span>
+          <span class="stat-value green">${manager.roi}</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Win Rate</span>
+          <span class="stat-value">${manager.winRate}</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Assets</span>
+          <span class="stat-value">${manager.assets}</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Investors</span>
+          <span class="stat-value">${manager.investors}</span>
+        </div>
+      </div>
+      <button class="btn-primary-full btn-allocate" data-name="${manager.name}" data-channel="${manager.channelName}">Delegate Capital</button>
+    `
+    elements.managersGrid.appendChild(card)
+  })
+
+  // Attach allocation triggers
+  document.querySelectorAll('.btn-allocate').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const name = e.target.getAttribute('data-name')
+      const channel = e.target.getAttribute('data-channel')
       
-      selectedTier.size = Number(size)
-      selectedTier.fee = Number(fee)
+      elements.modalManagerName.innerText = name
+      elements.modalManagerChannel.innerText = channel
+      openAllocateModal()
+    })
+  })
+}
 
-      elements.modalTierSize.innerText = `$${selectedTier.size.toLocaleString()}`
-      elements.modalTierFee.innerText = `$${selectedTier.fee.toLocaleString()}`
-      elements.modalTotalDue.innerText = `$${selectedTier.fee.toLocaleString()}.00`
-
-      openPurchaseModal()
+function setupEventListeners() {
+  // Filter Buttons
+  const filterBtns = document.querySelectorAll('.channel-btn')
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      filterBtns.forEach(b => b.classList.remove('active'))
+      e.target.classList.add('active')
+      const channel = e.target.getAttribute('data-channel')
+      renderManagers(channel)
     })
   })
 
-  // Confirm Purchase Button
-  if (elements.btnConfirmPurchase) {
-    elements.btnConfirmPurchase.addEventListener('click', () => {
-      elements.activeAccountSize.innerText = `$${selectedTier.size.toLocaleString()}`
-      alert(`Account activated successfully! You are now trading with a $${selectedTier.size.toLocaleString()} funded account.`)
-      closePurchaseModal()
-    })
+  // Modal Controls
+  if (elements.btnCloseAllocate) {
+    elements.btnCloseAllocate.addEventListener('click', closeAllocateModal)
   }
 
-  // Toggle Account Type
-  if (elements.btnTypeIndividual && elements.btnTypeBusiness) {
-    elements.btnTypeIndividual.addEventListener('click', () => {
-      elements.btnTypeIndividual.classList.add('active')
-      elements.btnTypeBusiness.classList.remove('active')
-    })
-
-    elements.btnTypeBusiness.addEventListener('click', () => {
-      elements.btnTypeBusiness.classList.add('active')
-      elements.btnTypeIndividual.classList.remove('active')
-    })
-  }
-
-  // Form Submission
-  if (elements.formSignup) {
-    elements.formSignup.addEventListener('submit', (e) => {
-      e.preventDefault()
-      const name = document.getElementById('input-name').value
-      const email = document.getElementById('input-email').value
-      alert(`Account created successfully for ${name} using ${email}`)
-      closeSignupModal()
+  if (elements.btnConfirmAllocate) {
+    elements.btnConfirmAllocate.addEventListener('click', () => {
+      alert(`Capital successfully delegated to ${elements.modalManagerName.innerText}!`)
+      closeAllocateModal()
     })
   }
 }
 
-function openSignupModal() {
-  if (elements.modalSignup) elements.modalSignup.removeAttribute('hidden')
+function openAllocateModal() {
+  if (elements.modalAllocate) elements.modalAllocate.removeAttribute('hidden')
 }
 
-function closeSignupModal() {
-  if (elements.modalSignup) elements.modalSignup.setAttribute('hidden', '')
-}
-
-function openPurchaseModal() {
-  if (elements.modalPurchase) elements.modalPurchase.removeAttribute('hidden')
-}
-
-function closePurchaseModal() {
-  if (elements.modalPurchase) elements.modalPurchase.setAttribute('hidden', '')
+function closeAllocateModal() {
+  if (elements.modalAllocate) elements.modalAllocate.setAttribute('hidden', '')
 }
 
 document.addEventListener('DOMContentLoaded', init)
