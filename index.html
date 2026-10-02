@@ -1,42 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CSB Capital and Social Bond</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
-  <header class="navbar">
-    <div class="logo-container">
-      <span class="logo-text">CSB</span>
-      <span class="sub-logo-text">Capital and Social Bond</span>
-    </div>
-    <nav class="nav-links">
-      <a href="#home" class="active">Home</a>
-      <a href="#dashboard">Dashboard</a>
-      <a href="#marketplace">Marketplace</a>
-      <a href="#rewards">Rewards</a>
-    </nav>
-    <div class="auth-actions">
-      <button id="btn-open-login" class="btn-login">Log In</button>
-      <button id="btn-open-signup" class="btn-signup">Get Started</button>
-    </div>
-  </header>
-
-  <section id="home" class="hero-section">
-    <div class="hero-content">
-      <p class="hero-tagline">REAL ACCOUNTS REAL TRADERS</p>
-      <h1 class="hero-title">Trade with Real Capital Not Just Promises</h1>
-      <p class="hero-description">CSB funds real trading accounts connects you with experienced managers and creates opportunities for you to grow as a trader and as part of a community</p>
-      <div class="hero-buttons">
-        <button id="btn-hero-signup" class="btn-primary">Get Started</button>
-        <button id="btn-hero-learn" class="btn-outline">Learn More</button>
-      </div>
-    </div>
-  </section>
-
   <!-- Trader Dashboard Section -->
   <section id="dashboard" class="dashboard-container">
     <div class="dashboard-header">
@@ -55,11 +16,11 @@
         <span class="metric-value" id="active-account-size">$50,000</span>
       </div>
       <div class="metric-card">
-        <span class="metric-label">Daily Drawdown Remaining</span>
-        <span class="metric-value positive" id="drawdown-limit">4.2% / 5.0%</span>
+        <span class="metric-label">Max Drawdown Status</span>
+        <span class="metric-value positive" id="drawdown-limit">Safe (&lt; 50%)</span>
       </div>
       <div class="metric-card">
-        <span class="metric-label">Total Profit Split (80%)</span>
+        <span class="metric-label">Total Earnings</span>
         <span class="metric-value positive" id="total-profit">+$3,420.00</span>
       </div>
     </div>
@@ -73,9 +34,9 @@
           <div class="tier-size">$10,000</div>
           <p class="tier-fee">Fee: $100 (1%)</p>
           <ul>
-            <li>50% Max Drawdown Rule</li>
-            <li>80/20 Profit Split</li>
-            <li>Bi-weekly Payouts</li>
+            <li>50% Max Drawdown Protection</li>
+            <li>Direct Capital Allocation</li>
+            <li>Flexible Withdrawal Terms</li>
           </ul>
           <button class="btn-primary-full btn-select-tier" data-size="10000" data-fee="100">Select Tier</button>
         </div>
@@ -86,9 +47,9 @@
           <div class="tier-size">$50,000</div>
           <p class="tier-fee">Fee: $500 (1%)</p>
           <ul>
-            <li>50% Max Drawdown Rule</li>
-            <li>80/20 Profit Split</li>
-            <li>Weekly Payouts</li>
+            <li>50% Max Drawdown Protection</li>
+            <li>Manager Channel Delegation</li>
+            <li>Priority Account Support</li>
           </ul>
           <button class="btn-primary-full btn-select-tier" data-size="50000" data-fee="500">Select Tier</button>
         </div>
@@ -98,83 +59,12 @@
           <div class="tier-size">$100,000</div>
           <p class="tier-fee">Fee: $1,000 (1%)</p>
           <ul>
-            <li>50% Max Drawdown Rule</li>
-            <li>90/10 Profit Split</li>
-            <li>Instant On-Demand Payouts</li>
+            <li>50% Max Drawdown Protection</li>
+            <li>Multi-Channel Delegation</li>
+            <li>Custom Risk Controls</li>
           </ul>
           <button class="btn-primary-full btn-select-tier" data-size="100000" data-fee="1000">Select Tier</button>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Purchase Modal -->
-  <div id="modal-purchase" class="modal-overlay" hidden>
-    <div class="modal-card">
-      <button id="btn-close-purchase" class="modal-close">X</button>
-      <h2>Confirm Account Purchase</h2>
-      <p class="modal-subtitle">Review your selected capital tier and fee breakdown.</p>
-      
-      <div class="purchase-summary">
-        <div class="summary-row">
-          <span>Funded Capital Size:</span>
-          <strong id="modal-tier-size">$50,000</strong>
-        </div>
-        <div class="summary-row">
-          <span>Activation Fee (1%):</span>
-          <strong id="modal-tier-fee">$500</strong>
-        </div>
-        <div class="summary-row total">
-          <span>Total Due Now:</span>
-          <strong id="modal-total-due" class="highlight">$500.00</strong>
-        </div>
-      </div>
-
-      <button id="btn-confirm-purchase" class="btn-primary-full">Confirm & Pay</button>
-    </div>
-  </div>
-
-  <!-- Signup Modal -->
-  <div id="modal-signup" class="modal-overlay" hidden>
-    <div class="modal-card">
-      <button id="btn-close-signup" class="modal-close">X</button>
-      <h2>Create Your Account</h2>
-      <p class="modal-subtitle">Join a community of traders managers and investors</p>
-      
-      <div class="account-type-toggle">
-        <button id="btn-type-individual" class="toggle-btn active">Individual</button>
-        <button id="btn-type-business" class="toggle-btn">Business</button>
-      </div>
-
-      <form id="form-signup">
-        <div class="form-group">
-          <label for="input-name">Full Name</label>
-          <input type="text" id="input-name" placeholder="Enter your full name" required>
-        </div>
-        <div class="form-group">
-          <label for="input-email">Email Address</label>
-          <input type="email" id="input-email" placeholder="you@example.com" required>
-        </div>
-        <div class="form-group">
-          <label for="input-phone">Phone Number</label>
-          <input type="tel" id="input-phone" placeholder="+234 801 234 5678" required>
-        </div>
-        <div class="form-group">
-          <label for="input-password">Password</label>
-          <input type="password" id="input-password" placeholder="Create a password" required>
-        </div>
-
-        <div class="onboarding-steps">
-          <div class="step active">1 Create Account</div>
-          <div class="step">2 Complete KYC</div>
-          <div class="step">3 Fund Account</div>
-        </div>
-
-        <button type="submit" class="btn-primary-full">Create Account</button>
-      </form>
-    </div>
-  </div>
-
-  <script src="app.js"></script>
-</body>
-</html>
