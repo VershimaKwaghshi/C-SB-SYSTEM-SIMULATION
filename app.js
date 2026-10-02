@@ -8,12 +8,12 @@ const TIER_CONFIGS = {
 let currentSelectedTierKey = 'pro-50k';
 
 const managersData = [
-  { id: 1, name: "Alpha FX Strategy", channel: "forex", channelName: "6. Forex", roi: "+88.4%", winRate: "81%", region: "West Africa", duration: "19 mos", risk: "Moderate", split: "50% Mgr | 25% Sub-Mgr | 25% C&SB" },
-  { id: 2, name: "Apex Alpha", channel: "alpha", channelName: "4. High-Alpha", roi: "+142.5%", winRate: "78%", region: "West Africa", duration: "14 mos", risk: "Moderate-High", split: "50% Mgr | 25% Sub-Mgr | 25% C&SB" },
-  { id: 3, name: "SafeHaven Macro", channel: "conservative", channelName: "1. Conservative", roi: "+24.1%", winRate: "89%", region: "Global", duration: "28 mos", risk: "Low", split: "50% Mgr | 25% Sub-Mgr | 25% C&SB" },
-  { id: 4, name: "Equinox Balanced", channel: "balanced", channelName: "2. Balanced", roi: "+58.3%", winRate: "72%", region: "East Africa", duration: "11 mos", risk: "Moderate", split: "50% Mgr | 25% Sub-Mgr | 25% C&SB" },
-  { id: 5, name: "Crypto Pulse", channel: "crypto", channelName: "5. Crypto", roi: "+210.8%", winRate: "65%", region: "Global", duration: "9 mos", risk: "High", split: "50% Mgr | 25% Sub-Mgr | 25% C&SB" },
-  { id: 6, name: "Quantum Growth", channel: "growth", channelName: "3. Growth", roi: "+95.2%", winRate: "74%", region: "Southern Africa", duration: "16 mos", risk: "Moderate-High", split: "50% Mgr | 25% Sub-Mgr | 25% C&SB" }
+  { id: 1, name: "Alpha FX Strategy", channel: "forex", channelName: "6. Forex", roi: "+88.4%", winRate: "81%", region: "West Africa", duration: "19 mos", risk: "Moderate", split: "50% Manager | 50% Account Owner" },
+  { id: 2, name: "Apex Alpha", channel: "alpha", channelName: "4. High-Alpha", roi: "+142.5%", winRate: "78%", region: "West Africa", duration: "14 mos", risk: "Moderate-High", split: "50% Manager | 50% Account Owner" },
+  { id: 3, name: "SafeHaven Macro", channel: "conservative", channelName: "1. Conservative", roi: "+24.1%", winRate: "89%", region: "Global", duration: "28 mos", risk: "Low", split: "50% Manager | 50% Account Owner" },
+  { id: 4, name: "Equinox Balanced", channel: "balanced", channelName: "2. Balanced", roi: "+58.3%", winRate: "72%", region: "East Africa", duration: "11 mos", risk: "Moderate", split: "50% Manager | 50% Account Owner" },
+  { id: 5, name: "Crypto Pulse", channel: "crypto", channelName: "5. Crypto", roi: "+210.8%", winRate: "65%", region: "Global", duration: "9 mos", risk: "High", split: "50% Manager | 50% Account Owner" },
+  { id: 6, name: "Quantum Growth", channel: "growth", channelName: "3. Growth", roi: "+95.2%", winRate: "74%", region: "Southern Africa", duration: "16 mos", risk: "Moderate-High", split: "50% Manager | 50% Account Owner" }
 ];
 
 const elements = {
@@ -100,11 +100,11 @@ function renderManagers(filterChannel) {
           <span class="stat-value">${manager.risk}</span>
         </div>
         <div class="stat-box full-width">
-          <span class="stat-label">Realized Profit Split</span>
+          <span class="stat-label">Primary Profit Split</span>
           <span class="stat-value" style="color:#00ff88; font-size:0.78rem;">${manager.split}</span>
         </div>
       </div>
-      <button class="btn-primary-full btn-delegate" data-name="${manager.name}" data-channel="${manager.channelName}">Delegate Capital Tier</button>
+      <button class="btn-primary-full btn-delegate" data-name="${manager.name}" data-channel="${manager.channelName}">Assign Account To Manager</button>
     `;
     elements.managersGrid.appendChild(card);
   });
@@ -133,7 +133,6 @@ function setupEventListeners() {
     });
   });
 
-  // Defensive dataset retrieval via lexical button closure
   document.querySelectorAll('.btn-buy-account').forEach(btn => {
     btn.addEventListener('click', () => {
       const tierKey = btn.dataset.tier || 'pro-50k';
@@ -167,7 +166,7 @@ function setupEventListeners() {
 
   elements.btnConfirmAllocate?.addEventListener('click', () => {
     const config = TIER_CONFIGS[currentSelectedTierKey];
-    alert(`Capital tier ($${config.size.toLocaleString()}) successfully delegated to ${elements.modalManagerName.innerText}.`);
+    alert(`Capital tier ($${config.size.toLocaleString()}) successfully assigned to ${elements.modalManagerName.innerText}.`);
     closeModal(elements.modalAllocate);
   });
 
