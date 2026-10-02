@@ -154,3 +154,112 @@
 .highlight {
   color: #00ff88;
 }
+
+/* Subtitle */
+.subtitle {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+/* Channel Filters Bar */
+.channel-filter-bar {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.channel-btn {
+  background-color: #0a1118;
+  border: 1px solid #1e293b;
+  color: #94a3b8;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.channel-btn:hover,
+.channel-btn.active {
+  background-color: #00ff88;
+  color: #060b11;
+  border-color: #00ff88;
+}
+
+/* Managers Grid */
+.managers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.manager-card {
+  background-color: #0a1118;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: border-color 0.2s;
+}
+
+.manager-card:hover {
+  border-color: #00ff88;
+}
+
+.manager-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.manager-info h3 {
+  color: #ffffff;
+  font-size: 1.1rem;
+}
+
+.manager-channel-tag {
+  color: #00ff88;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.manager-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  background-color: #060b11;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  color: #64748b;
+  font-size: 0.75rem;
+}
+
+.stat-value {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.stat-value.green {
+  color: #00ff88;
+}
