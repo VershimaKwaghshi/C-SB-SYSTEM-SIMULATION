@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CSB Capital and Social Bond</title>
-  <link rel="stylesheet" href="styles.css?v=2">
+  <title>C&SB - Capital & Social Bond Ecosystem (V7)</title>
+  <link rel="stylesheet" href="styles.css?v=7">
 </head>
 <body>
 
-    <header class="navbar">
+  <!-- Top Navigation Header -->
+  <header class="navbar">
     <div class="logo-container">
-      <span class="logo-text">C&SB</span>
-      <span class="sub-logo-text">CAPITAL & SOCIAL BOND</span>
+      <span class="logo-text">C&amp;SB</span>
+      <span class="sub-logo-text">CAPITAL &amp; SOCIAL BOND</span>
     </div>
     <div class="auth-actions">
       <button id="btn-open-login" class="btn-login">Log In</button>
@@ -19,108 +20,263 @@
     </div>
   </header>
 
-  <!-- Navigation Bar Links -->
+  <!-- Secondary Category Navigation -->
   <nav class="nav-links-bar">
-    <a href="#home">Home</a>
+    <a href="#home" class="active">Home</a>
+    <a href="#how-it-works">Architecture Flow</a>
     <a href="#dashboard">Dashboard</a>
-    <a href="#marketplace" class="active">Marketplace</a>
-    <a href="#rewards">Rewards</a>
+    <a href="#marketplace">Manager Marketplace</a>
+    <a href="#social-bond">Social Bond (SB) Credit</a>
   </nav>
 
   <!-- Hero Section -->
   <section id="home" class="hero-section">
     <div class="hero-content">
-      <p class="hero-tagline">INSTITUTIONAL CAPITAL &amp; CAPITAL PRESERVATION ENGINE</p>
-      <h1 class="hero-title">The Premier Decentralized Capital &amp; Social Bond Ecosystem</h1>
-      <p class="hero-description">We power elite traders with direct capital allocation, dynamic 7-channel strategy delegation, and built-in 50% drawdown safety controls. No paper trading. No standard prop games. Just pure institutional execution.</p>
+      <p class="hero-tagline">COMMUNITY-POWERED CAPITAL ALLOCATION ENGINE</p>
+      <h1 class="hero-title">Acquire Capital. Delegate Execution. Multiply Network Opportunities.</h1>
+      <!-- Correction 1: Rule-based pathways -->
+      <p class="hero-description">C&amp;SB transforms single account purchases into dynamic network economics. You acquire funded capital, delegate execution to verified managers, and open rule-based pathways to generate up to 5 additional equivalent account opportunities across the community over time.</p>
       <div class="hero-buttons">
-        <button id="btn-hero-signup" class="btn-primary">Access Capital</button>
-        <button id="btn-hero-learn" class="btn-outline">Explore Channels</button>
+        <button id="btn-hero-signup" class="btn-primary">Acquire Capital Tier</button>
+        <button id="btn-hero-learn" class="btn-outline">Explore Network Architecture</button>
       </div>
     </div>
   </section>
 
-  <!-- Trader Dashboard Section -->
-  <section id="dashboard" class="dashboard-container">
-    <div class="dashboard-header">
-      <h2>Trader Dashboard</h2>
-      <button id="btn-buy-account" class="btn-primary">+ Get Funded Account</button>
+  <!-- Visual Workflow / Architecture Engine Flow -->
+  <section id="how-it-works" class="dashboard-container">
+    <div class="section-title-center">
+      <h2>The C&amp;SB Generation Flow</h2>
+      <p class="subtitle">Demonstrating how 1 qualifying account creates a network pathway for up to 5 additional equivalent account opportunities.</p>
     </div>
 
-    <!-- Account Metrics Overview -->
+    <div class="flow-container">
+      <div class="flow-step">
+        <div class="step-num">01</div>
+        <h4>1. Acquire Account Tier</h4>
+        <p>Purchase a $10k, $50k, or $100k capital allocation tier with a 1% setup fee.</p>
+      </div>
+      <div class="flow-arrow">➔</div>
+      <div class="flow-step">
+        <div class="step-num">02</div>
+        <h4>2. Delegate Execution</h4>
+        <p>Assign execution of your purchased account to a verified channel manager. You do not personally trade this account.</p>
+      </div>
+      <div class="flow-arrow">➔</div>
+      <div class="flow-step highlight">
+        <div class="step-num">03</div>
+        <h4>3. Progressive Generation</h4>
+        <p>Specific performance &amp; network qualification rules unlock up to 5 additional equivalent account opportunities over time.</p>
+      </div>
+      <div class="flow-arrow">➔</div>
+      <div class="flow-step">
+        <div class="step-num">04</div>
+        <h4>4. Profit Split Distribution</h4>
+        <p>Profit split applies to realized trading profits; account capital remains subject to applicable risk rules (50% Manager | 25% Sub-Manager | 25% C&amp;SB).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard Overview -->
+  <section id="dashboard" class="dashboard-container">
+    <div class="dashboard-header">
+      <div>
+        <h2>Account Owner &amp; Trader Dashboard</h2>
+        <p class="subtitle">Clear separation between your purchased delegated tier and your assigned trading allocation.</p>
+      </div>
+      <button id="btn-buy-account" class="btn-primary btn-buy-account" data-tier="pro-50k">+ Acquire Capital Tier</button>
+    </div>
+
+    <!-- Account Metrics Grid -->
     <div class="metrics-grid">
       <div class="metric-card">
         <span class="metric-label">Wallet Balance</span>
         <span class="metric-value" id="wallet-balance">$1,250.00</span>
       </div>
       <div class="metric-card">
-        <span class="metric-label">Active Funded Account</span>
-        <span class="metric-value" id="active-account-size">$50,000</span>
+        <span class="metric-label">Purchased Account (Delegated)</span>
+        <span class="metric-value">$50,000</span>
+        <span class="metric-subtext">Assigned to: Alpha FX Manager</span>
       </div>
       <div class="metric-card">
-        <span class="metric-label">Max Drawdown Status</span>
-        <span class="metric-value positive" id="drawdown-limit">Safe (&lt; 50%)</span>
+        <span class="metric-label">My Assigned Allocation</span>
+        <span class="metric-value">$50,000</span>
+        <span class="metric-subtext">Received via C&amp;SB Network Assignment</span>
       </div>
       <div class="metric-card">
-        <span class="metric-label">Total Earnings</span>
-        <span class="metric-value positive" id="total-profit">+$3,420.00</span>
+        <span class="metric-label">Current Active Network Capital</span>
+        <span class="metric-value positive" id="current-active-capital">$150,000</span>
+        <span class="metric-subtext">1 Purchased ($50k) + 2 Active Slots ($100k)</span>
       </div>
     </div>
 
-    <!-- Account Selection / Tiers -->
+    <!-- 1-to-5 Network Generation Visualizer Card -->
+    <div class="dashboard-section network-visualizer-card">
+      <div class="network-header">
+        <div>
+          <h3>Network Generation Engine (6 Total Accounts Potential)</h3>
+          <p class="subtitle">One qualifying account creates a pathway through which up to 5 additional equivalent account opportunities can be generated over time.</p>
+        </div>
+        <div class="metrics-dual-badge">
+          <div class="metric-pill">
+            <span>Current Active Network Capital</span>
+            <strong id="viz-active-capital">$150,000</strong>
+          </div>
+          <div class="metric-pill highlight-pill">
+            <span>Maximum Network Capital Represented</span>
+            <strong id="viz-max-capital">$300,000</strong>
+          </div>
+          <div class="slots-breakdown-tag">2 of 5 generation slots currently active</div>
+        </div>
+      </div>
+      
+      <!-- Standard Qualification Path Disclaimer Hierarchy -->
+      <div class="qualification-hierarchy-box">
+        <div class="qual-title">STANDARD QUALIFICATION PATH</div>
+        <div class="qual-tree">
+          <div><strong>Primary Qualification:</strong> Target Net ROI &amp; Minimum Active Trading Window</div>
+          <div><strong>Illustrative Network Triggers:</strong> +12% ROI / 45 Days | +15% ROI / 60 Days</div>
+        </div>
+        <div class="qual-guardrail">
+          <strong>PROTOTYPE GUARDRAIL:</strong> The prototype demonstrates engine flow and UI mechanics. Production rulebooks determine actual qualification and state transitions.
+        </div>
+      </div>
+
+      <div class="network-grid">
+        <!-- Primary Purchased Account Node -->
+        <div class="network-node primary-node">
+          <span class="node-badge">Purchased Account</span>
+          <h4>$50,000 Account</h4>
+          <p>Delegated to: <strong>Alpha FX Manager</strong></p>
+          <span class="status-active">Active • Maximum Drawdown: 50%</span>
+        </div>
+
+        <!-- Dynamic Generation Slots -->
+        <!-- Correction 3: Explicitly marking all triggers as illustrative -->
+        <div class="network-branches">
+          
+          <!-- Slot 1: Active -->
+          <div class="sub-node state-active">
+            <div class="slot-header">
+              <span class="state-badge active-bg">ACTIVE</span>
+              <span class="sub-label">Generation #1</span>
+            </div>
+            <strong>$50,000 Equivalent Account</strong>
+            <p class="slot-details">Assigned to: <strong>Trader A</strong></p>
+            <div class="trigger-box">Trigger Met: Initial Setup &amp; Channel Assignment <em>(Illustrative Trigger)</em></div>
+          </div>
+
+          <!-- Slot 2: Active -->
+          <div class="sub-node state-active">
+            <div class="slot-header">
+              <span class="state-badge active-bg">ACTIVE</span>
+              <span class="sub-label">Generation #2</span>
+            </div>
+            <strong>$50,000 Equivalent Account</strong>
+            <p class="slot-details">Assigned to: <strong>Trader B</strong></p>
+            <div class="trigger-box">Trigger Met: Target +5% Net ROI &amp; 15 Days Active <em>(Illustrative Trigger)</em></div>
+          </div>
+
+          <!-- Slot 3: In Progress -->
+          <div class="sub-node state-progress">
+            <div class="slot-header">
+              <span class="state-badge progress-bg">IN PROGRESS</span>
+              <span class="sub-label">Generation #3</span>
+            </div>
+            <strong>$50,000 Potential Account</strong>
+            <p class="slot-details">Performance Progress: <strong>65%</strong></p>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" style="width: 65%;"></div>
+            </div>
+            <div class="trigger-box">Trigger Required: Target +8% Net ROI &amp; 30 Days Active <em>(Illustrative Trigger)</em></div>
+          </div>
+
+          <!-- Slot 4: Locked -->
+          <div class="sub-node state-locked">
+            <div class="slot-header">
+              <span class="state-badge locked-bg">LOCKED</span>
+              <span class="sub-label">Generation #4</span>
+            </div>
+            <strong>$50,000 Potential Account</strong>
+            <p class="slot-details">Awaiting Qualification</p>
+            <div class="trigger-box">Trigger Required: Target +12% Net ROI &amp; 45 Days Active <em>(Illustrative Trigger)</em></div>
+          </div>
+
+          <!-- Slot 5: Locked -->
+          <div class="sub-node state-locked">
+            <div class="slot-header">
+              <span class="state-badge locked-bg">LOCKED</span>
+              <span class="sub-label">Generation #5</span>
+            </div>
+            <strong>$50,000 Potential Account</strong>
+            <p class="slot-details">Awaiting Qualification</p>
+            <div class="trigger-box">Trigger Required: Target +15% Net ROI &amp; 60 Days Active <em>(Illustrative Trigger)</em></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Tier Selection Options -->
     <div class="dashboard-section">
-      <h3>Available Funded Accounts</h3>
+      <h3>Available Capital Allocation Tiers</h3>
       <div class="tiers-grid">
         <div class="tier-card">
           <h4>Starter Tier</h4>
           <div class="tier-size">$10,000</div>
-          <p class="tier-fee">Fee: $100 (1%)</p>
+          <p class="tier-fee">Capital Allocation: $10,000 | Setup Fee: $100 (1%)</p>
+          <div class="disclaimer-box">⚠️ You delegate execution of this purchased account. You do not trade it directly.</div>
           <ul>
-            <li>50% Max Drawdown Protection</li>
-            <li>Direct Capital Allocation</li>
-            <li>Flexible Withdrawal Terms</li>
+            <li>Unlocks pathways for up to <strong>5 × $10,000</strong> additional account opportunities over time</li>
+            <li>Maximum Network Capital Represented: <strong>$60,000</strong></li>
+            <li>Maximum Drawdown: 50%</li>
+            <li>Profit split applies to realized trading profits: 50% Mgr | 25% Sub-Mgr | 25% C&amp;SB</li>
           </ul>
-          <button class="btn-primary-full btn-select-tier" data-size="10000" data-fee="100">Select Tier</button>
+          <button class="btn-primary-full btn-select-tier btn-buy-account" data-tier="starter-10k" data-size="10000" data-fee="100">Select Starter ($10k)</button>
         </div>
 
         <div class="tier-card featured">
-          <span class="badge">Popular</span>
+          <span class="badge">Most Popular</span>
           <h4>Pro Tier</h4>
           <div class="tier-size">$50,000</div>
-          <p class="tier-fee">Fee: $500 (1%)</p>
+          <p class="tier-fee">Capital Allocation: $50,000 | Setup Fee: $500 (1%)</p>
+          <div class="disclaimer-box">⚠️ You delegate execution of this purchased account. You do not trade it directly.</div>
           <ul>
-            <li>50% Max Drawdown Protection</li>
-            <li>Manager Channel Delegation</li>
-            <li>Priority Account Support</li>
+            <li>Unlocks pathways for up to <strong>5 × $50,000</strong> additional account opportunities over time</li>
+            <li>Maximum Network Capital Represented: <strong>$300,000</strong></li>
+            <li>Maximum Drawdown: 50%</li>
+            <li>Profit split applies to realized trading profits: 50% Mgr | 25% Sub-Mgr | 25% C&amp;SB</li>
           </ul>
-          <button class="btn-primary-full btn-select-tier" data-size="50000" data-fee="500">Select Tier</button>
+          <button class="btn-primary-full btn-select-tier btn-buy-account" data-tier="pro-50k" data-size="50000" data-fee="500">Select Pro ($50k)</button>
         </div>
 
         <div class="tier-card">
           <h4>Elite Tier</h4>
           <div class="tier-size">$100,000</div>
-          <p class="tier-fee">Fee: $1,000 (1%)</p>
+          <p class="tier-fee">Capital Allocation: $100,000 | Setup Fee: $1,000 (1%)</p>
+          <div class="disclaimer-box">⚠️ You delegate execution of this purchased account. You do not trade it directly.</div>
           <ul>
-            <li>50% Max Drawdown Protection</li>
-            <li>Multi-Channel Delegation</li>
-            <li>Custom Risk Controls</li>
+            <li>Unlocks pathways for up to <strong>5 × $100,000</strong> additional account opportunities over time</li>
+            <li>Maximum Network Capital Represented: <strong>$600,000</strong></li>
+            <li>Maximum Drawdown: 50%</li>
+            <li>Profit split applies to realized trading profits: 50% Mgr | 25% Sub-Mgr | 25% C&amp;SB</li>
           </ul>
-          <button class="btn-primary-full btn-select-tier" data-size="100000" data-fee="1000">Select Tier</button>
+          <button class="btn-primary-full btn-select-tier btn-buy-account" data-tier="elite-100k" data-size="100000" data-fee="1000">Select Elite ($100k)</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Manager Marketplace Section -->
+  <!-- Strategy Channels Marketplace -->
   <section id="marketplace" class="dashboard-container">
     <div class="dashboard-header">
       <div>
-        <h2>Manager Channels Marketplace</h2>
-        <p class="subtitle">Select verified trading managers across 7 distinct strategy channels.</p>
+        <h2>Verified Manager Marketplace <span class="proto-tag">[Illustrative Prototype Data]</span></h2>
+        <p class="subtitle">Delegate your purchased capital tier to verified managers under strict profit-sharing rules.</p>
       </div>
     </div>
 
-    <!-- Channel Filters -->
+    <!-- Strategy Channel Filters -->
     <div class="channel-filter-bar">
       <button class="channel-btn active" data-channel="all">All Channels</button>
       <button class="channel-btn" data-channel="conservative">1. Conservative</button>
@@ -129,47 +285,97 @@
       <button class="channel-btn" data-channel="alpha">4. High-Alpha</button>
       <button class="channel-btn" data-channel="crypto">5. Crypto</button>
       <button class="channel-btn" data-channel="forex">6. Forex</button>
-      <button class="channel-btn" data-channel="social">7. Social Bond</button>
     </div>
 
-    <!-- Managers Cards Grid -->
-    <div class="managers-grid" id="managers-grid">
-      <!-- Cards dynamically generated via app.js -->
+    <!-- Manager Grid Container -->
+    <div class="managers-grid" id="managers-grid"></div>
+  </section>
+
+  <!-- Social Bond Section -->
+  <section id="social-bond" class="dashboard-container">
+    <div class="social-bond-card">
+      <div class="sb-header">
+        <span class="badge-sb">Separate Credit Solution</span>
+        <h2>Social Bond (SB) Facility</h2>
+        <p>A dedicated 30-day liquidity/credit mechanism for eligible traders navigating risk recovery.</p>
+      </div>
+
+      <div class="sb-grid">
+        <!-- Correction 2: Applicable 50% drawdown threshold -->
+        <div class="sb-box">
+          <h4>50% Drawdown Trigger</h4>
+          <p>Eligibility activates strictly when an account reaches the applicable 50% drawdown threshold.</p>
+        </div>
+        <div class="sb-box">
+          <h4>30-Day Working Facility</h4>
+          <p>Provides short-term liquidity backed by existing trading balance and security rules.</p>
+        </div>
+        <div class="sb-box">
+          <h4>Consented Bonders &amp; Guarantors</h4>
+          <p>Risk is supported by verified community guarantors with pre-agreed fee splits.</p>
+        </div>
+      </div>
+
+      <div class="sb-action">
+        <button class="btn-outline" id="btn-apply-sb">Evaluate SB Eligibility</button>
+      </div>
     </div>
   </section>
 
   <!-- Purchase Modal -->
   <div id="modal-purchase" class="modal-overlay" hidden>
     <div class="modal-card">
-      <button id="btn-close-purchase" class="modal-close">X</button>
-      <h2>Confirm Account Purchase</h2>
-      <p class="modal-subtitle">Review your selected capital tier and fee breakdown.</p>
+      <button id="btn-close-purchase" class="modal-close">✕</button>
+      <h2>Confirm Tier Acquisition</h2>
+      <p class="modal-subtitle">Review capital allocation and network generation mechanics.</p>
       
+      <!-- Correction 1: Rule-based pathways -->
+      <div class="disclaimer-modal-box">
+        <strong>Important C&amp;SB Mechanism:</strong>
+        <p>You are acquiring a funded account tier and delegating its trading execution. Over time, rule-based performance triggers open pathways to generate up to 5 additional equivalent account opportunities across the community.</p>
+      </div>
+
       <div class="purchase-summary">
         <div class="summary-row">
-          <span>Funded Capital Size:</span>
+          <span>Capital Allocation:</span>
           <strong id="modal-tier-size">$50,000</strong>
         </div>
         <div class="summary-row">
-          <span>Activation Fee (1%):</span>
+          <span>Initial Active Capital:</span>
+          <strong id="modal-initial-active">$50,000</strong>
+        </div>
+        <div class="summary-row">
+          <span>Network Generation Potential:</span>
+          <strong>Up to 5 × <span id="modal-sub-size">$50,000</span> slots</strong>
+        </div>
+        <div class="summary-row">
+          <span>Maximum Network Capital Represented:</span>
+          <strong id="modal-total-network" class="highlight">$300,000</strong>
+        </div>
+        <div class="summary-row">
+          <span>Realized Profit Split:</span>
+          <strong style="color:#00ff88; font-size: 0.8rem;">50% Manager | 25% Sub-Mgr | 25% C&amp;SB</strong>
+        </div>
+        <div class="summary-row">
+          <span>Setup Fee (1%):</span>
           <strong id="modal-tier-fee">$500</strong>
         </div>
         <div class="summary-row total">
-          <span>Total Due Now:</span>
-          <strong id="modal-total-due" class="highlight">$500.00</strong>
+          <span>Total Payable (Capital + Fee):</span>
+          <strong id="modal-total-due" class="highlight">$50,500.00</strong>
         </div>
       </div>
 
-      <button id="btn-confirm-purchase" class="btn-primary-full">Confirm & Pay</button>
+      <button id="btn-confirm-purchase" class="btn-primary-full">Confirm &amp; Proceed to Manager Delegation</button>
     </div>
   </div>
 
-  <!-- Manager Allocation Modal -->
+  <!-- Manager Delegation Modal -->
   <div id="modal-allocate" class="modal-overlay" hidden>
     <div class="modal-card">
-      <button id="btn-close-allocate" class="modal-close">X</button>
-      <h2>Delegate Capital to Manager</h2>
-      <p class="modal-subtitle">Confirm allocation details under the 50% Drawdown Safety Rule.</p>
+      <button id="btn-close-allocate" class="modal-close">✕</button>
+      <h2>Delegate Capital Tier</h2>
+      <p class="modal-subtitle">Assigning purchased account execution rights to a verified manager.</p>
       
       <div class="purchase-summary">
         <div class="summary-row">
@@ -177,34 +383,29 @@
           <strong id="modal-manager-name">Alpha FX Strategy</strong>
         </div>
         <div class="summary-row">
-          <span>Channel:</span>
+          <span>Strategy Channel:</span>
           <strong id="modal-manager-channel">Forex</strong>
         </div>
         <div class="summary-row">
-          <span>Safety Rule:</span>
-          <strong>50% Max Drawdown Protection</strong>
+          <span>Realized Profit Split:</span>
+          <strong style="color:#00ff88; font-size: 0.8rem;">50% Manager | 25% Sub-Mgr | 25% C&amp;SB</strong>
         </div>
         <div class="summary-row total">
-          <span>Allocation Amount:</span>
-          <strong id="modal-allocate-amount" class="highlight">$10,000.00</strong>
+          <span>Delegated Capital:</span>
+          <strong id="modal-allocate-amount" class="highlight">$50,000.00</strong>
         </div>
       </div>
 
-      <button id="btn-confirm-allocate" class="btn-primary-full">Confirm Allocation</button>
+      <button id="btn-confirm-allocate" class="btn-primary-full">Confirm Manager Delegation</button>
     </div>
   </div>
 
   <!-- Signup Modal -->
   <div id="modal-signup" class="modal-overlay" hidden>
     <div class="modal-card">
-      <button id="btn-close-signup" class="modal-close">X</button>
-      <h2>Create Your Account</h2>
-      <p class="modal-subtitle">Join a community of traders managers and investors</p>
-      
-      <div class="account-type-toggle">
-        <button id="btn-type-individual" class="toggle-btn active">Individual</button>
-        <button id="btn-type-business" class="toggle-btn">Business</button>
-      </div>
+      <button id="btn-close-signup" class="modal-close">✕</button>
+      <h2>Join C&amp;SB Network</h2>
+      <p class="modal-subtitle">Participate as an account owner, trader, or sub-manager.</p>
 
       <form id="form-signup">
         <div class="form-group">
@@ -225,6 +426,28 @@
         </div>
 
         <button type="submit" class="btn-primary-full">Create Account</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Login Modal -->
+  <div id="modal-login" class="modal-overlay" hidden>
+    <div class="modal-card">
+      <button id="btn-close-login" class="modal-close">✕</button>
+      <h2>Log In to C&amp;SB</h2>
+      <p class="modal-subtitle">Access your account dashboard and capital management.</p>
+
+      <form id="form-login">
+        <div class="form-group">
+          <label for="input-login-email">Email Address</label>
+          <input type="email" id="input-login-email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="input-login-password">Password</label>
+          <input type="password" id="input-login-password" placeholder="Enter password" required>
+        </div>
+
+        <button type="submit" class="btn-primary-full">Sign In</button>
       </form>
     </div>
   </div>
