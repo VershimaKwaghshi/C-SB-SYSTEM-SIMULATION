@@ -11,12 +11,12 @@ body {
   line-height: 1.5;
 }
 
-/* Navbar */
+/* Navbar Fix for Mobile */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 24px;
+  padding: 12px 16px;
   background-color: #0a1118;
   border-bottom: 1px solid #1e293b;
   position: sticky;
@@ -30,77 +30,51 @@ body {
 }
 
 .logo-text {
-  font-size: 1.4rem;
-  font-weight: 800;
+  font-size: 1.3rem;
+  font-weight: 900;
   color: #00ff88;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  line-height: 1;
 }
 
 .sub-logo-text {
-  font-size: 0.6rem;
+  font-size: 0.55rem;
   color: #94a3b8;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  margin-top: 3px;
+  white-space: nowrap;
 }
 
-.nav-links {
+/* Scrollable Nav Bar for Mobile */
+.nav-links-bar {
   display: flex;
-  gap: 16px;
+  gap: 20px;
+  background-color: #060b11;
+  padding: 10px 16px;
+  border-bottom: 1px solid #1e293b;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
-.nav-links a {
+.nav-links-bar a {
   color: #94a3b8;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
   transition: color 0.2s;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
+.nav-links-bar a:hover,
+.nav-links-bar a.active {
   color: #00ff88;
 }
 
-.auth-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.btn-login {
-  background-color: transparent;
-  color: #f8fafc;
-  border: 1px solid #334155;
-  padding: 6px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.85rem;
-}
-
-.btn-login:hover {
-  border-color: #00ff88;
-  color: #00ff88;
-}
-
-.btn-signup {
-  background-color: #00ff88;
-  color: #060b11;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 0.85rem;
-}
-
-.btn-signup:hover {
-  background-color: #00cc6a;
-}
-
-/* Hero Section */
+/* High-Impact Hero Section */
 .hero-section {
-  padding: 60px 20px;
+  padding: 48px 18px;
   text-align: center;
-  background: radial-gradient(circle at top, #112233 0%, #060b11 70%);
+  background: radial-gradient(circle at top, #0d2033 0%, #060b11 80%);
   display: flex;
   justify-content: center;
 }
@@ -111,30 +85,40 @@ body {
 
 .hero-tagline {
   color: #00ff88;
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.72rem;
+  font-weight: 800;
   letter-spacing: 2px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
+  text-transform: uppercase;
 }
 
 .hero-title {
-  font-size: 2.2rem;
-  font-weight: 800;
+  font-size: 2.1rem;
+  font-weight: 900;
   color: #ffffff;
   margin-bottom: 16px;
-  line-height: 1.2;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
 }
 
 .hero-description {
   color: #94a3b8;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
   margin-bottom: 28px;
 }
 
 .hero-buttons {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   gap: 12px;
+}
+
+@media (min-width: 600px) {
+  .hero-buttons {
+    flex-direction: row;
+    justify-content: center;
+  }
 }
 
 .btn-primary {
