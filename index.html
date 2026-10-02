@@ -1,150 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang=en>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>C&SB Capital and Social Bond Platform Simulation</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset=UTF-8>
+  <meta name=viewport content=width=device-width, initial-scale=1.0>
+  <title>CSB Capital and Social Bond</title>
+  <link rel=stylesheet href=styles.css>
 </head>
 <body>
-  <header>
-    <h1>C&SB Capital and Social Bond</h1>
-    <p>Master Operating Platform and Core Ledger Simulation</p>
+
+  <header class=navbar>
+    <div class=logo-container>
+      <span class=logo-text>CSB</span>
+      <span class=sub-logo-text>Capital and Social Bond</span>
+    </div>
+    <nav class=nav-links>
+      <a href=#home class=active>Home</a>
+      <a href=#accounts>Accounts</a>
+      <a href=#how-it-works>How It Works</a>
+      <a href=#rewards>Rewards</a>
+      <a href=#about>About</a>
+    </nav>
+    <div class=auth-actions>
+      <button id=btn-open-login class=btn-login>Log In</button>
+      <button id=btn-open-signup class=btn-signup>Get Started</button>
+    </div>
   </header>
 
-  <main class="grid-container">
-    <section class="card full-width">
-      <h2>System Core State</h2>
-      <div class="metrics-grid">
-        <div class="metric">
-          <span class="label">Service Fee Revenue</span>
-          <span id="sys-service-revenue" class="val">$0.00</span>
-        </div>
-        <div class="metric">
-          <span class="label">Withdrawal Fee Revenue</span>
-          <span id="sys-withdraw-revenue" class="val">$0.00</span>
-        </div>
-        <div class="metric">
-          <span class="label">Broker Rebates</span>
-          <span id="sys-rebates" class="val">$0.00</span>
-        </div>
-        <div class="metric">
-          <span class="label">SB Protocol Share</span>
-          <span id="sys-sb-revenue" class="val">$0.00</span>
-        </div>
-        <div class="metric">
-          <span class="label">Active Account Equity</span>
-          <span id="sys-equity" class="val">$0.00</span>
-        </div>
-        <div class="metric">
-          <span class="label">Bonder Liens</span>
-          <span id="sys-liens" class="val">$0.00</span>
-        </div>
+  <section id=home class=hero-section>
+    <div class=hero-content>
+      <p class=hero-tagline>REAL ACCOUNTS REAL TRADERS</p>
+      <h1 class=hero-title>Trade with Real Capital Not Just Promises</h1>
+      <p class=hero-description>CSB funds real trading accounts connects you with experienced managers and creates opportunities for you to grow as a trader and as part of a community</p>
+      <div class=hero-buttons>
+        <button id=btn-hero-signup class=btn-primary>Get Started</button>
+        <button id=btn-hero-learn class=btn-outline>Learn More</button>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="card">
-      <h2>1 Capital Purchase Engine</h2>
-      <form id="capital-form">
-        <label for="user-name">Trader Name</label>
-        <input type="text" id="user-name" value="Trader Alex" required>
-        
-        <label for="account-price">Account Capital Size</label>
-        <input type="number" id="account-price" value="10000" step="1000" required>
+  <section class=features-grid>
+    <div class=feature-card>
+      <h3>Funded Trading Accounts</h3>
+      <p>Trade with real capital not your savings</p>
+    </div>
+    <div class=feature-card>
+      <h3>Community Driven</h3>
+      <p>Traders helping traders grow together</p>
+    </div>
+    <div class=feature-card>
+      <h3>Manager Opportunities</h3>
+      <p>Get funded manage accounts earn performance rewards</p>
+    </div>
+    <div class=feature-card>
+      <h3>Referral Earnings</h3>
+      <p>Bring in traders earn more together</p>
+    </div>
+  </section>
 
-        <label for="purchase-type">Purchase Method</label>
-        <select id="purchase-type">
-          <option value="direct">Direct Purchase</option>
-          <option value="installment">Installment Purchase</option>
-        </select>
+  <div id=modal-signup class=modal-overlay hidden>
+    <div class=modal-card>
+      <button id=btn-close-signup class=modal-close>X</button>
+      <h2>Create Your Account</h2>
+      <p class=modal-subtitle>Join a community of traders managers and investors</p>
+      
+      <div class=account-type-toggle>
+        <button id=btn-type-individual class=toggle-btn active>Individual</button>
+        <button id=btn-type-business class=toggle-btn>Business</button>
+      </div>
 
-        <button type="submit" class="btn-primary">Buy Account</button>
+      <form id=form-signup>
+        <div class=form-group>
+          <label for=input-name>Full Name</label>
+          <input type=text id=input-name placeholder=Enter your full name required>
+        </div>
+        <div class=form-group>
+          <label for=input-email>Email Address</label>
+          <input type=email id=input-email placeholder=you@example.com required>
+        </div>
+        <div class=form-group>
+          <label for=input-phone>Phone Number</label>
+          <input type=tel id=input-phone placeholder=+234 801 234 5678 required>
+        </div>
+        <div class=form-group>
+          <label for=input-password>Password</label>
+          <input type=password id=input-password placeholder=Create a password required>
+        </div>
+
+        <div class=onboarding-steps>
+          <div class=step active>1 Create Account</div>
+          <div class=step>2 Complete KYC</div>
+          <div class=step>3 Fund Account</div>
+        </div>
+
+        <button type=submit class=btn-primary-full>Create Account</button>
       </form>
+    </div>
+  </div>
 
-      <div id="capital-status" class="status-box">No active purchase</div>
-
-      <div class="control-group">
-        <label for="installment-pay-amt">Installment Payment Amount</label>
-        <input type="number" id="installment-pay-amt" value="2525">
-        <button id="btn-pay-installment" class="btn-secondary" disabled>Submit Payment</button>
-      </div>
-
-      <div class="control-group">
-        <label for="withdraw-amt">Profit Withdrawal Amount</label>
-        <input type="number" id="withdraw-amt" value="1000">
-        <button id="btn-withdraw" class="btn-success" disabled>Request Withdrawal</button>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>2 Reciprocal Management and Trading</h2>
-      <div id="management-status" class="status-box">No assigned account</div>
-
-      <div class="control-group">
-        <button id="btn-assign-submanager" class="btn-secondary" disabled>Delegate to Submanager</button>
-      </div>
-
-      <div class="control-group">
-        <label for="lots-traded">Traded Lots</label>
-        <input type="number" id="lots-traded" value="10" min="1">
-        <label for="trade-pct">Trade Return Percent</label>
-        <input type="number" id="trade-pct" value="-50" min="-90" max="50">
-        <button id="btn-run-trade" class="btn-danger" disabled>Execute Trade</button>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>3 Social Bond Facility</h2>
-      <div id="sb-status" class="status-box">Social Bond inactive</div>
-      <button id="btn-trigger-sb" class="btn-warning" disabled>Activate Social Bond</button>
-      <button id="btn-expire-sb" class="btn-danger" disabled>Expire 30 Day Contract</button>
-    </section>
-
-    <section class="card">
-      <h2>4 Revenue Intercept Engine</h2>
-      <label for="intercept-source">Revenue Source</label>
-      <select id="intercept-source">
-        <option value="Channel 1 Primary Account Share">Channel 1 Primary Account Share</option>
-        <option value="Channel 2 Sub Account 1 Share">Channel 2 Sub Account 1 Share</option>
-        <option value="Channel 3 Sub Account 2 Share">Channel 3 Sub Account 2 Share</option>
-        <option value="Channel 4 Sub Account 3 Share">Channel 4 Sub Account 3 Share</option>
-        <option value="Channel 5 Sub Account 4 Share">Channel 5 Sub Account 4 Share</option>
-        <option value="Channel 6 Referral Income">Channel 6 Referral Income</option>
-        <option value="Channel 7 SB Bonding Income">Channel 7 SB Bonding Income</option>
-      </select>
-
-      <label for="intercept-amount">Earnings Amount</label>
-      <input type="number" id="intercept-amount" value="500">
-
-      <button id="btn-process-intercept" class="btn-success" disabled>Intercept Earnings</button>
-      <div id="intercept-status" class="status-box">Intercept inactive</div>
-    </section>
-
-    <section class="card full-width">
-      <h2>5 Bonder Network State</h2>
-      <div id="bonders-list" class="bonders-grid"></div>
-    </section>
-
-    <section class="card full-width">
-      <h2>Master Ledger Audit Log</h2>
-      <div class="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>Tx ID</th>
-              <th>Timestamp</th>
-              <th>From Account</th>
-              <th>To Account</th>
-              <th>Amount</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody id="ledger-rows"></tbody>
-        </table>
-      </div>
-    </section>
-  </main>
-
-  <script src="app.js"></script>
+  <script src=app.js></script>
 </body>
 </html>
