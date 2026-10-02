@@ -1,3 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSB Capital and Social Bond</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo-container">
+      <span class="logo-text">CSB</span>
+      <span class="sub-logo-text">Capital and Social Bond</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#marketplace" class="active">Marketplace</a>
+      <a href="#rewards">Rewards</a>
+    </nav>
+    <div class="auth-actions">
+      <button id="btn-open-login" class="btn-login">Log In</button>
+      <button id="btn-open-signup" class="btn-signup">Get Started</button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section">
+    <div class="hero-content">
+      <p class="hero-tagline">REAL ACCOUNTS REAL TRADERS</p>
+      <h1 class="hero-title">Trade with Real Capital Not Just Promises</h1>
+      <p class="hero-description">CSB funds real trading accounts connects you with experienced managers and creates opportunities for you to grow as a trader and as part of a community</p>
+      <div class="hero-buttons">
+        <button id="btn-hero-signup" class="btn-primary">Get Started</button>
+        <button id="btn-hero-learn" class="btn-outline">Learn More</button>
+      </div>
+    </div>
+  </section>
+
   <!-- Trader Dashboard Section -->
   <section id="dashboard" class="dashboard-container">
     <div class="dashboard-header">
@@ -68,3 +108,125 @@
       </div>
     </div>
   </section>
+
+  <!-- Manager Marketplace Section -->
+  <section id="marketplace" class="dashboard-container">
+    <div class="dashboard-header">
+      <div>
+        <h2>Manager Channels Marketplace</h2>
+        <p class="subtitle">Select verified trading managers across 7 distinct strategy channels.</p>
+      </div>
+    </div>
+
+    <!-- Channel Filters -->
+    <div class="channel-filter-bar">
+      <button class="channel-btn active" data-channel="all">All Channels</button>
+      <button class="channel-btn" data-channel="conservative">1. Conservative</button>
+      <button class="channel-btn" data-channel="balanced">2. Balanced</button>
+      <button class="channel-btn" data-channel="growth">3. Growth</button>
+      <button class="channel-btn" data-channel="alpha">4. High-Alpha</button>
+      <button class="channel-btn" data-channel="crypto">5. Crypto</button>
+      <button class="channel-btn" data-channel="forex">6. Forex</button>
+      <button class="channel-btn" data-channel="social">7. Social Bond</button>
+    </div>
+
+    <!-- Managers Cards Grid -->
+    <div class="managers-grid" id="managers-grid">
+      <!-- Cards dynamically generated via app.js -->
+    </div>
+  </section>
+
+  <!-- Purchase Modal -->
+  <div id="modal-purchase" class="modal-overlay" hidden>
+    <div class="modal-card">
+      <button id="btn-close-purchase" class="modal-close">X</button>
+      <h2>Confirm Account Purchase</h2>
+      <p class="modal-subtitle">Review your selected capital tier and fee breakdown.</p>
+      
+      <div class="purchase-summary">
+        <div class="summary-row">
+          <span>Funded Capital Size:</span>
+          <strong id="modal-tier-size">$50,000</strong>
+        </div>
+        <div class="summary-row">
+          <span>Activation Fee (1%):</span>
+          <strong id="modal-tier-fee">$500</strong>
+        </div>
+        <div class="summary-row total">
+          <span>Total Due Now:</span>
+          <strong id="modal-total-due" class="highlight">$500.00</strong>
+        </div>
+      </div>
+
+      <button id="btn-confirm-purchase" class="btn-primary-full">Confirm & Pay</button>
+    </div>
+  </div>
+
+  <!-- Manager Allocation Modal -->
+  <div id="modal-allocate" class="modal-overlay" hidden>
+    <div class="modal-card">
+      <button id="btn-close-allocate" class="modal-close">X</button>
+      <h2>Delegate Capital to Manager</h2>
+      <p class="modal-subtitle">Confirm allocation details under the 50% Drawdown Safety Rule.</p>
+      
+      <div class="purchase-summary">
+        <div class="summary-row">
+          <span>Selected Manager:</span>
+          <strong id="modal-manager-name">Alpha FX Strategy</strong>
+        </div>
+        <div class="summary-row">
+          <span>Channel:</span>
+          <strong id="modal-manager-channel">Forex</strong>
+        </div>
+        <div class="summary-row">
+          <span>Safety Rule:</span>
+          <strong>50% Max Drawdown Protection</strong>
+        </div>
+        <div class="summary-row total">
+          <span>Allocation Amount:</span>
+          <strong id="modal-allocate-amount" class="highlight">$10,000.00</strong>
+        </div>
+      </div>
+
+      <button id="btn-confirm-allocate" class="btn-primary-full">Confirm Allocation</button>
+    </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div id="modal-signup" class="modal-overlay" hidden>
+    <div class="modal-card">
+      <button id="btn-close-signup" class="modal-close">X</button>
+      <h2>Create Your Account</h2>
+      <p class="modal-subtitle">Join a community of traders managers and investors</p>
+      
+      <div class="account-type-toggle">
+        <button id="btn-type-individual" class="toggle-btn active">Individual</button>
+        <button id="btn-type-business" class="toggle-btn">Business</button>
+      </div>
+
+      <form id="form-signup">
+        <div class="form-group">
+          <label for="input-name">Full Name</label>
+          <input type="text" id="input-name" placeholder="Enter your full name" required>
+        </div>
+        <div class="form-group">
+          <label for="input-email">Email Address</label>
+          <input type="email" id="input-email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="input-phone">Phone Number</label>
+          <input type="tel" id="input-phone" placeholder="+234 801 234 5678" required>
+        </div>
+        <div class="form-group">
+          <label for="input-password">Password</label>
+          <input type="password" id="input-password" placeholder="Create a password" required>
+        </div>
+
+        <button type="submit" class="btn-primary-full">Create Account</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
