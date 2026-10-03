@@ -1,452 +1,803 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>C&SB - Capital & Social Bond Ecosystem (V7)</title>
-  <link rel="stylesheet" href="styles.css?v=7">
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>C&SB — Loss Recovery Without New Deposits</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
 
-  <!-- Top Navigation Header -->
-  <header class="navbar">
-    <div class="logo-container">
-      <span class="logo-text">C&amp;SB</span>
-      <span class="sub-logo-text">CAPITAL &amp; SOCIAL BOND</span>
-    </div>
-    <div class="auth-actions">
-      <button id="btn-open-login" class="btn-login">Log In</button>
-      <button id="btn-open-signup" class="btn-signup">Get Started</button>
-    </div>
-  </header>
+  <!-- MOBILE OVERLAY -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
 
-  <!-- Secondary Category Navigation -->
-  <nav class="nav-links-bar">
-    <a href="#home" class="active">Home</a>
-    <a href="#how-it-works">How It Works</a>
-    <a href="#dashboard">Dashboard</a>
-    <a href="#marketplace">Pro Managers</a>
-    <a href="#social-bond">Social Bond (SB) Credit</a>
-  </nav>
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
 
-  <!-- Hero Section -->
-  <section id="home" class="hero-section">
-    <div class="hero-content">
-      <p class="hero-tagline">SHARED NETWORK CAPITAL ALLOCATION ENGINE</p>
-      <h1 class="hero-title">Buy Funded Capital. Hand Over To A Pro Manager. Earn Extra Accounts.</h1>
-      <p class="hero-description">C&amp;SB lets you acquire funded trading accounts and assign management to verified pro traders. Hit performance targets to unlock up to 5 additional account opportunities across the network over time.</p>
-      <div class="hero-buttons">
-        <button id="btn-hero-signup" class="btn-primary">Acquire Capital Tier</button>
-        <button id="btn-hero-learn" class="btn-outline">Explore How It Works</button>
-      </div>
-    </div>
-  </section>
+    <div class="brand">
+      <div class="brand-mark">C</div>
 
-  <!-- Visual Workflow Section -->
-  <section id="how-it-works" class="dashboard-container">
-    <div class="section-title-center">
-      <h2>How The C&amp;SB Engine Works</h2>
-      <p class="subtitle">Demonstrating how 1 primary purchased account unlocks up to 5 extra assigned accounts.</p>
-    </div>
-
-    <div class="flow-container">
-      <div class="flow-step">
-        <div class="step-num">01</div>
-        <h4>1. Buy Account Tier</h4>
-        <p>Purchase a $10k, $50k, or $100k capital allocation tier with a 1% setup fee.</p>
-      </div>
-      <div class="flow-arrow">➔</div>
-      <div class="flow-step">
-        <div class="step-num">02</div>
-        <h4>2. Assign To Pro Trader</h4>
-        <p>Hand over execution of your primary account to a verified manager. Split trading profits 50% Manager / 50% Owner.</p>
-      </div>
-      <div class="flow-arrow">➔</div>
-      <div class="flow-step highlight">
-        <div class="step-num">03</div>
-        <h4>3. Unlock Extra Slots</h4>
-        <p>Rule-based performance targets unlock up to 5 extra assigned C&amp;SB account slots over time.</p>
-      </div>
-      <div class="flow-arrow">➔</div>
-      <div class="flow-step">
-        <div class="step-num">04</div>
-        <h4>4. Profit Split Distribution</h4>
-        <p>Primary Account: 50% Manager | 50% Owner.<br>Extra C&amp;SB Slots: 25% Recipient | 25% Sub-Mgr | 50% C&amp;SB.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Dashboard Overview -->
-  <section id="dashboard" class="dashboard-container">
-    <div class="dashboard-header">
       <div>
-        <h2>Account Owner &amp; Trader Dashboard</h2>
-        <p class="subtitle">Clear separation between your primary purchased account and assigned extra C&amp;SB slots.</p>
-      </div>
-      <button id="btn-buy-account" class="btn-primary btn-buy-account" data-tier="pro-50k">+ Acquire Capital Tier</button>
-    </div>
-
-    <!-- Account Metrics Grid -->
-    <div class="metrics-grid">
-      <div class="metric-card">
-        <span class="metric-label">Wallet Balance</span>
-        <span class="metric-value" id="wallet-balance">$1,250.00</span>
-      </div>
-      <div class="metric-card">
-        <span class="metric-label">Purchased Account (Primary)</span>
-        <span class="metric-value">$50,000</span>
-        <span class="metric-subtext">Assigned to: Alpha FX Manager (50/50 Split)</span>
-      </div>
-      <div class="metric-card">
-        <span class="metric-label">My Assigned Allocation</span>
-        <span class="metric-value">$50,000</span>
-        <span class="metric-subtext">Received via C&amp;SB Network Assignment</span>
-      </div>
-      <div class="metric-card">
-        <span class="metric-label">Current Active Network Capital</span>
-        <span class="metric-value positive" id="current-active-capital">$150,000</span>
-        <span class="metric-subtext">1 Primary ($50k) + 2 Active Slots ($100k)</span>
+        <div class="brand-name">C&SB</div>
+        <div class="brand-subtitle">Capital and Social Bond</div>
       </div>
     </div>
 
-    <!-- 1-to-5 Network Generation Visualizer Card -->
-    <div class="dashboard-section network-visualizer-card">
-      <div class="network-header">
-        <div>
-          <h3>Network Generation Engine (6 Total Accounts Potential)</h3>
-          <p class="subtitle">1 Primary Account + up to 5 Extra C&amp;SB Assigned Accounts unlocked over time.</p>
-        </div>
-        <div class="metrics-dual-badge">
-          <div class="metric-pill">
-            <span>Current Active Capital</span>
-            <strong id="viz-active-capital">$150,000</strong>
-          </div>
-          <div class="metric-pill highlight-pill">
-            <span>Max Network Capital</span>
-            <strong id="viz-max-capital">$300,000</strong>
-          </div>
-          <div class="slots-breakdown-tag">2 of 5 extra slots active</div>
-        </div>
+    <nav class="nav">
+
+      <button class="nav-item active" data-view="overview">
+        <span>⌂</span>
+        Overview
+      </button>
+
+      <button class="nav-item" data-view="accounts">
+        <span>◫</span>
+        Accounts
+      </button>
+
+      <button class="nav-item" data-view="network">
+        <span>◎</span>
+        Recovery Network
+      </button>
+
+      <button class="nav-item" data-view="recovery">
+        <span>↻</span>
+        Recovery Cases
+      </button>
+
+      <button class="nav-item" data-view="sb">
+        <span>⇄</span>
+        Social Bond
+      </button>
+
+      <button class="nav-item" data-view="participants">
+        <span>♙</span>
+        Participants
+      </button>
+
+      <button class="nav-item" data-view="ledger">
+        <span>▤</span>
+        Ledger
+      </button>
+
+    </nav>
+
+    <div class="sidebar-footer">
+
+      <div class="system-status">
+        <span class="status-dot"></span>
+        Simulation Mode
       </div>
-      
-      <!-- Qualification Box -->
-      <div class="qualification-hierarchy-box">
-        <div class="qual-title">STANDARD QUALIFICATION PATH</div>
-        <div class="qual-tree">
-          <div><strong>Primary Qualification:</strong> Target Net ROI &amp; Minimum Active Trading Window</div>
-          <div><strong>Illustrative Network Triggers:</strong> +12% ROI / 45 Days | +15% ROI / 60 Days</div>
-        </div>
-        <div class="qual-guardrail">
-          <strong>PROTOTYPE GUARDRAIL:</strong> Engine flow and UI demonstration. Production rulebooks determine actual qualification.
-        </div>
-      </div>
 
-      <div class="network-grid">
-        <!-- Primary Purchased Account Node -->
-        <div class="network-node primary-node">
-          <span class="node-badge">Primary Purchased Account</span>
-          <h4>$50,000 Account</h4>
-          <p>Assigned to: <strong>Alpha FX Manager</strong></p>
-          <div style="color:#00ff88; font-size:0.75rem; font-weight:700; margin-top:4px;">Split: 50% Manager | 50% Owner</div>
-          <span class="status-active">Active • Max Drawdown: 50%</span>
-        </div>
+      <button class="reset-button" id="resetBtn">
+        ↺ Reset Simulation
+      </button>
 
-        <!-- Dynamic Generation Slots -->
-        <div class="network-branches">
-          
-          <!-- Slot 1: Active -->
-          <div class="sub-node state-active">
-            <div class="slot-header">
-              <span class="state-badge active-bg">ACTIVE</span>
-              <span class="sub-label">Extra Slot #1</span>
-            </div>
-            <strong>$50,000 C&amp;SB Account</strong>
-            <p class="slot-details">Assigned to: <strong>Trader A</strong></p>
-            <div style="color:#00ff88; font-size:0.68rem; font-weight:700; margin-top:2px;">Split: 25% Recipient | 25% Sub-Mgr | 50% C&amp;SB</div>
-            <div class="trigger-box">Trigger Met: Setup &amp; Channel Assignment <em>(Illustrative)</em></div>
-          </div>
-
-          <!-- Slot 2: Active -->
-          <div class="sub-node state-active">
-            <div class="slot-header">
-              <span class="state-badge active-bg">ACTIVE</span>
-              <span class="sub-label">Extra Slot #2</span>
-            </div>
-            <strong>$50,000 C&amp;SB Account</strong>
-            <p class="slot-details">Assigned to: <strong>Trader B</strong></p>
-            <div style="color:#00ff88; font-size:0.68rem; font-weight:700; margin-top:2px;">Split: 25% Recipient | 25% Sub-Mgr | 50% C&amp;SB</div>
-            <div class="trigger-box">Trigger Met: Target +5% ROI &amp; 15 Days <em>(Illustrative)</em></div>
-          </div>
-
-          <!-- Slot 3: In Progress -->
-          <div class="sub-node state-progress">
-            <div class="slot-header">
-              <span class="state-badge progress-bg">IN PROGRESS</span>
-              <span class="sub-label">Extra Slot #3</span>
-            </div>
-            <strong>$50,000 Potential Account</strong>
-            <p class="slot-details">Progress: <strong>65%</strong></p>
-            <div class="progress-bar-container">
-              <div class="progress-bar-fill" style="width: 65%;"></div>
-            </div>
-            <div class="trigger-box">Target Required: +8% ROI &amp; 30 Days <em>(Illustrative)</em></div>
-          </div>
-
-          <!-- Slot 4: Locked -->
-          <div class="sub-node state-locked">
-            <div class="slot-header">
-              <span class="state-badge locked-bg">LOCKED</span>
-              <span class="sub-label">Extra Slot #4</span>
-            </div>
-            <strong>$50,000 Potential Account</strong>
-            <p class="slot-details">Awaiting Qualification</p>
-            <div class="trigger-box">Target Required: +12% ROI &amp; 45 Days <em>(Illustrative)</em></div>
-          </div>
-
-          <!-- Slot 5: Locked -->
-          <div class="sub-node state-locked">
-            <div class="slot-header">
-              <span class="state-badge locked-bg">LOCKED</span>
-              <span class="sub-label">Extra Slot #5</span>
-            </div>
-            <strong>$50,000 Potential Account</strong>
-            <p class="slot-details">Awaiting Qualification</p>
-            <div class="trigger-box">Target Required: +15% ROI &amp; 60 Days <em>(Illustrative)</em></div>
-          </div>
-
-        </div>
-      </div>
     </div>
 
-    <!-- Tier Selection Options -->
-    <div class="dashboard-section">
-      <h3>Available Capital Allocation Tiers</h3>
-      <div class="tiers-grid">
-        <div class="tier-card">
-          <h4>Starter Tier</h4>
-          <div class="tier-size">$10,000</div>
-          <p class="tier-fee">Capital Allocation: $10,000 | Setup Fee: $100 (1%)</p>
-          <div class="disclaimer-box">⚠️ Primary account execution is assigned to a manager. You do not trade this account directly.</div>
-          <ul>
-            <li>Primary Account Profit Split: <strong>50% Manager | 50% Owner</strong></li>
-            <li>Extra Assigned Slots: <strong>25% Recipient | 25% Sub-Mgr | 50% C&amp;SB</strong></li>
-            <li>Unlocks pathways for up to <strong>5 × $10,000</strong> extra accounts over time</li>
-            <li>Max Network Capital: <strong>$60,000</strong></li>
-          </ul>
-          <button class="btn-primary-full btn-select-tier btn-buy-account" data-tier="starter-10k" data-size="10000" data-fee="100">Select Starter ($10k)</button>
-        </div>
+  </aside>
 
-        <div class="tier-card featured">
-          <span class="badge">Most Popular</span>
-          <h4>Pro Tier</h4>
-          <div class="tier-size">$50,000</div>
-          <p class="tier-fee">Capital Allocation: $50,000 | Setup Fee: $500 (1%)</p>
-          <div class="disclaimer-box">⚠️ Primary account execution is assigned to a manager. You do not trade this account directly.</div>
-          <ul>
-            <li>Primary Account Profit Split: <strong>50% Manager | 50% Owner</strong></li>
-            <li>Extra Assigned Slots: <strong>25% Recipient | 25% Sub-Mgr | 50% C&amp;SB</strong></li>
-            <li>Unlocks pathways for up to <strong>5 × $50,000</strong> extra accounts over time</li>
-            <li>Max Network Capital: <strong>$300,000</strong></li>
-          </ul>
-          <button class="btn-primary-full btn-select-tier btn-buy-account" data-tier="pro-50k" data-size="50000" data-fee="500">Select Pro ($50k)</button>
-        </div>
+  <!-- MAIN -->
+  <main class="main">
 
-        <div class="tier-card">
-          <h4>Elite Tier</h4>
-          <div class="tier-size">$100,000</div>
-          <p class="tier-fee">Capital Allocation: $100,000 | Setup Fee: $1,000 (1%)</p>
-          <div class="disclaimer-box">⚠️ Primary account execution is assigned to a manager. You do not trade this account directly.</div>
-          <ul>
-            <li>Primary Account Profit Split: <strong>50% Manager | 50% Owner</strong></li>
-            <li>Extra Assigned Slots: <strong>25% Recipient | 25% Sub-Mgr | 50% C&amp;SB</strong></li>
-            <li>Unlocks pathways for up to <strong>5 × $100,000</strong> extra accounts over time</li>
-            <li>Max Network Capital: <strong>$600,000</strong></li>
-          </ul>
-          <button class="btn-primary-full btn-select-tier btn-buy-account" data-tier="elite-100k" data-size="100000" data-fee="1000">Select Elite ($100k)</button>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- TOPBAR -->
+    <header class="topbar">
 
-  <!-- Strategy Channels Marketplace -->
-  <section id="marketplace" class="dashboard-container">
-    <div class="dashboard-header">
+      <button class="mobile-menu" id="mobileMenu">
+        ☰
+      </button>
+
       <div>
-        <h2>Verified Manager Marketplace <span class="proto-tag">[Illustrative Data]</span></h2>
-        <p class="subtitle">Assign management of your primary capital tier under a strict 50% Manager / 50% Owner split.</p>
-      </div>
-    </div>
-
-    <!-- Strategy Channel Filters -->
-    <div class="channel-filter-bar">
-      <button class="channel-btn active" data-channel="all">All Channels</button>
-      <button class="channel-btn" data-channel="conservative">1. Conservative</button>
-      <button class="channel-btn" data-channel="balanced">2. Balanced</button>
-      <button class="channel-btn" data-channel="growth">3. Growth</button>
-      <button class="channel-btn" data-channel="alpha">4. High-Alpha</button>
-      <button class="channel-btn" data-channel="crypto">5. Crypto</button>
-      <button class="channel-btn" data-channel="forex">6. Forex</button>
-    </div>
-
-    <!-- Manager Grid Container -->
-    <div class="managers-grid" id="managers-grid"></div>
-  </section>
-
-  <!-- Social Bond Section -->
-  <section id="social-bond" class="dashboard-container">
-    <div class="social-bond-card">
-      <div class="sb-header">
-        <span class="badge-sb">Separate Credit Solution</span>
-        <h2>Social Bond (SB) Facility</h2>
-        <p>A dedicated 30-day liquidity/credit mechanism for eligible traders navigating risk recovery.</p>
-      </div>
-
-      <div class="sb-grid">
-        <div class="sb-box">
-          <h4>50% Drawdown Trigger</h4>
-          <p>Eligibility activates strictly when an account reaches the applicable 50% drawdown threshold.</p>
+        <div class="topbar-title" id="pageTitle">
+          Recovery Overview
         </div>
-        <div class="sb-box">
-          <h4>30-Day Working Facility</h4>
-          <p>Provides short-term liquidity backed by existing trading balance and security rules.</p>
-        </div>
-        <div class="sb-box">
-          <h4>Consented Bonders &amp; Guarantors</h4>
-          <p>Risk is supported by verified community guarantors with pre-agreed fee splits.</p>
+
+        <div class="topbar-subtitle">
+          Loss Recovery Without New Deposits
         </div>
       </div>
 
-      <div class="sb-action">
-        <button class="btn-outline" id="btn-apply-sb">Evaluate SB Eligibility</button>
-      </div>
-    </div>
-  </section>
+      <div class="topbar-right">
 
-  <!-- Purchase Modal -->
-  <div id="modal-purchase" class="modal-overlay" hidden>
-    <div class="modal-card">
-      <button id="btn-close-purchase" class="modal-close">✕</button>
-      <h2>Confirm Tier Acquisition</h2>
-      <p class="modal-subtitle">Review capital allocation and profit-split mechanics.</p>
-      
-      <div class="disclaimer-modal-box">
-        <strong>Profit Split Breakdown:</strong>
-        <p>• <strong>Primary Purchased Account:</strong> 50% Manager | 50% Account Owner<br>• <strong>Extra Assigned C&amp;SB Slots:</strong> 25% Recipient | 25% Sub-Manager | 50% C&amp;SB</p>
+        <div class="simulation-badge">
+          SIMULATION
+        </div>
+
+        <div class="avatar">
+          V
+        </div>
+
       </div>
 
-      <div class="purchase-summary">
-        <div class="summary-row">
-          <span>Capital Allocation:</span>
-          <strong id="modal-tier-size">$50,000</strong>
-        </div>
-        <div class="summary-row">
-          <span>Initial Active Capital:</span>
-          <strong id="modal-initial-active">$50,000</strong>
-        </div>
-        <div class="summary-row">
-          <span>Extra Account Potential:</span>
-          <strong>Up to 5 × <span id="modal-sub-size">$50,000</span> slots</strong>
-        </div>
-        <div class="summary-row">
-          <span>Max Network Capital:</span>
-          <strong id="modal-total-network" class="highlight">$300,000</strong>
-        </div>
-        <div class="summary-row">
-          <span>Setup Fee (1%):</span>
-          <strong id="modal-tier-fee">$500</strong>
-        </div>
-        <div class="summary-row total">
-          <span>Total Payable (Capital + Fee):</span>
-          <strong id="modal-total-due" class="highlight">$50,500.00</strong>
-        </div>
-      </div>
+    </header>
 
-      <button id="btn-confirm-purchase" class="btn-primary-full">Confirm &amp; Proceed to Manager Assignment</button>
-    </div>
-  </div>
+    <!-- CONTENT -->
+    <section class="content">
 
-  <!-- Manager Delegation Modal -->
-  <div id="modal-allocate" class="modal-overlay" hidden>
-    <div class="modal-card">
-      <button id="btn-close-allocate" class="modal-close">✕</button>
-      <h2>Assign To Pro Trader</h2>
-      <p class="modal-subtitle">Assigning execution rights for your primary purchased account.</p>
-      
-      <div class="purchase-summary">
-        <div class="summary-row">
-          <span>Selected Manager:</span>
-          <strong id="modal-manager-name">Alpha FX Strategy</strong>
-        </div>
-        <div class="summary-row">
-          <span>Strategy Channel:</span>
-          <strong id="modal-manager-channel">Forex</strong>
-        </div>
-        <div class="summary-row">
-          <span>Primary Profit Split:</span>
-          <strong style="color:#00ff88; font-size: 0.8rem;">50% Manager | 50% Account Owner</strong>
-        </div>
-        <div class="summary-row total">
-          <span>Assigned Capital:</span>
-          <strong id="modal-allocate-amount" class="highlight">$50,000.00</strong>
-        </div>
-      </div>
+      <!-- =========================================================
+           OVERVIEW
+      ========================================================== -->
 
-      <button id="btn-confirm-allocate" class="btn-primary-full">Confirm Manager Assignment</button>
-    </div>
-  </div>
+      <section class="view active" id="view-overview">
 
-  <!-- Signup Modal -->
-  <div id="modal-signup" class="modal-overlay" hidden>
-    <div class="modal-card">
-      <button id="btn-close-signup" class="modal-close">✕</button>
-      <h2>Join C&amp;SB Network</h2>
-      <p class="modal-subtitle">Participate as an account owner, trader, or sub-manager.</p>
+        <div class="hero">
 
-      <form id="form-signup">
-        <div class="form-group">
-          <label for="input-name">Full Name</label>
-          <input type="text" id="input-name" placeholder="Enter your full name" required>
-        </div>
-        <div class="form-group">
-          <label for="input-email">Email Address</label>
-          <input type="email" id="input-email" placeholder="you@example.com" required>
-        </div>
-        <div class="form-group">
-          <label for="input-phone">Phone Number</label>
-          <input type="tel" id="input-phone" placeholder="+234 801 234 5678" required>
-        </div>
-        <div class="form-group">
-          <label for="input-password">Password</label>
-          <input type="password" id="input-password" placeholder="Create a password" required>
+          <div class="hero-copy">
+
+            <div class="eyebrow">
+              C&SB CORE PURPOSE
+            </div>
+
+            <h1>
+              Loss Recovery
+              <span>Without New Deposits.</span>
+            </h1>
+
+            <p>
+              A trading loss does not have to terminate participation.
+              Recovery can continue through the responsible participant's
+              eligible economic network while Social Bond provides a pathway
+              for trading continuity.
+            </p>
+
+            <div class="hero-actions">
+
+              <button class="primary-btn" id="triggerLossBtn">
+                Simulate 50% Loss
+              </button>
+
+              <button class="secondary-btn" data-view-target="network">
+                View Recovery Network
+              </button>
+
+            </div>
+
+          </div>
+
+          <div class="hero-visual">
+
+            <div class="recovery-flow">
+
+              <div class="flow-node">
+                <strong>LOSS</strong>
+                <small>50% drawdown</small>
+              </div>
+
+              <div class="flow-line"></div>
+
+              <div class="flow-node active-node">
+                <strong>RECOVERY</strong>
+                <small>Economic network</small>
+              </div>
+
+              <div class="flow-line"></div>
+
+              <div class="flow-node">
+                <strong>SB</strong>
+                <small>Trading continuity</small>
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
 
-        <button type="submit" class="btn-primary-full">Create Account</button>
-      </form>
-    </div>
-  </div>
 
-  <!-- Login Modal -->
-  <div id="modal-login" class="modal-overlay" hidden>
-    <div class="modal-card">
-      <button id="btn-close-login" class="modal-close">✕</button>
-      <h2>Log In to C&amp;SB</h2>
-      <p class="modal-subtitle">Access your account dashboard and capital management.</p>
+        <!-- KPI CARDS -->
 
-      <form id="form-login">
-        <div class="form-group">
-          <label for="input-login-email">Email Address</label>
-          <input type="email" id="input-login-email" placeholder="you@example.com" required>
-        </div>
-        <div class="form-group">
-          <label for="input-login-password">Password</label>
-          <input type="password" id="input-login-password" placeholder="Enter password" required>
+        <div class="section-heading">
+
+          <div>
+            <h2>System Position</h2>
+            <p>Current simulated state</p>
+          </div>
+
         </div>
 
-        <button type="submit" class="btn-primary-full">Sign In</button>
-      </form>
-    </div>
-  </div>
+        <div class="stats-grid">
+
+          <div class="stat-card">
+            <div class="stat-label">Primary Account</div>
+            <div class="stat-value">$1,000,000</div>
+            <div class="stat-meta" id="primaryStatus">
+              Active
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">Total Recovery Obligation</div>
+            <div class="stat-value" id="totalRecovery">
+              $0
+            </div>
+            <div class="stat-meta">Across active cases</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">Eligible Sources</div>
+            <div class="stat-value" id="sourceCount">
+              10
+            </div>
+            <div class="stat-meta">Potential recovery channels</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">Trading Continuity</div>
+            <div class="stat-value" id="continuityStatus">
+              Active
+            </div>
+            <div class="stat-meta">SB pathway</div>
+          </div>
+
+        </div>
+
+
+        <!-- RECOVERY TIMELINE -->
+
+        <div class="panel">
+
+          <div class="panel-header">
+
+            <div>
+              <h2>Core Recovery Cycle</h2>
+              <p>
+                Recovery and trading continuity operate in parallel.
+              </p>
+            </div>
+
+            <span class="panel-tag">
+              CORE
+            </span>
+
+          </div>
+
+          <div class="timeline">
+
+            <div class="timeline-item complete">
+              <div class="timeline-number">1</div>
+
+              <div>
+                <strong>Trading Account</strong>
+                <p>
+                  Participant operates within the C&SB account ecosystem.
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item" id="timelineLoss">
+              <div class="timeline-number">2</div>
+
+              <div>
+                <strong>Loss Event</strong>
+                <p>
+                  Account reaches the defined 50% drawdown threshold.
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item" id="timelineRecovery">
+              <div class="timeline-number">3</div>
+
+              <div>
+                <strong>Recovery Network</strong>
+                <p>
+                  Eligible earnings connected to the responsible participant
+                  become subject to recovery rules.
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item" id="timelineSB">
+              <div class="timeline-number">4</div>
+
+              <div>
+                <strong>Social Bond Continuity</strong>
+                <p>
+                  Eligible trader can move into another trading pathway while
+                  recovery continues.
+                </p>
+              </div>
+            </div>
+
+            <div class="timeline-item" id="timelineSettlement">
+              <div class="timeline-number">5</div>
+
+              <div>
+                <strong>Settlement</strong>
+                <p>
+                  Recovery obligation is eventually closed through the ledger.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ACTION CENTER -->
+
+        <div class="panel action-panel">
+
+          <div class="panel-header">
+
+            <div>
+              <h2>Simulation Controls</h2>
+              <p>
+                Run the C&SB recovery lifecycle.
+              </p>
+            </div>
+
+          </div>
+
+          <div class="simulation-controls">
+
+            <button class="control-btn" id="lossBtn">
+              ① Trigger 50% Loss
+            </button>
+
+            <button class="control-btn" id="activateSBBtn">
+              ② Activate SB
+            </button>
+
+            <button class="control-btn" id="secondLossBtn">
+              ③ Trigger Second 50% Loss
+            </button>
+
+            <button class="control-btn" id="recoverBtn">
+              ④ Apply Recovery
+            </button>
+
+            <button class="control-btn success-control" id="settleBtn">
+              ⑤ Settle Recovery
+            </button>
+
+          </div>
+
+          <div class="simulation-message" id="simulationMessage">
+            Simulation ready. Trigger the first loss to begin.
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================================================
+           ACCOUNTS
+      ========================================================== -->
+
+      <section class="view" id="view-accounts">
+
+        <div class="page-heading">
+
+          <div>
+            <div class="eyebrow">ACCOUNT ECOSYSTEM</div>
+
+            <h1>
+              Account Network
+            </h1>
+
+            <p>
+              The participant's economic network can contain the original
+              account, an account managed by another participant and up to
+              five additional C&SB accounts assigned to sub-managers.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="account-grid" id="accountGrid"></div>
+
+      </section>
+
+
+      <!-- =========================================================
+           NETWORK
+      ========================================================== -->
+
+      <section class="view" id="view-network">
+
+        <div class="page-heading">
+
+          <div>
+            <div class="eyebrow">RECOVERY ARCHITECTURE</div>
+
+            <h1>
+              Recovery Network
+            </h1>
+
+            <p>
+              When a qualifying loss occurs, C&SB evaluates the responsible
+              participant's eligible economic relationships.
+            </p>
+          </div>
+
+          <div class="network-summary">
+
+            <div>
+              <span>Potential sources</span>
+              <strong id="networkSourceCount">10</strong>
+            </div>
+
+            <div>
+              <span>Active cases</span>
+              <strong id="networkCaseCount">0</strong>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="network-banner">
+
+          <div class="network-banner-icon">
+            ↻
+          </div>
+
+          <div>
+            <strong>
+              Recovery is based on eligible earnings, not account notional.
+            </strong>
+
+            <p>
+              A $1M account does not equal $1M of recoverable cash.
+              Recovery capacity comes from contractually eligible realized
+              economic value generated through the participant's network.
+            </p>
+          </div>
+
+        </div>
+
+        <div class="source-grid" id="sourceGrid"></div>
+
+      </section>
+
+
+      <!-- =========================================================
+           RECOVERY CASES
+      ========================================================== -->
+
+      <section class="view" id="view-recovery">
+
+        <div class="page-heading">
+
+          <div>
+            <div class="eyebrow">RECOVERY ENGINE</div>
+
+            <h1>
+              Recovery Cases
+            </h1>
+
+            <p>
+              Every qualifying loss creates an independently tracked
+              recovery obligation.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div id="recoveryCasesContainer"></div>
+
+      </section>
+
+
+      <!-- =========================================================
+           SB
+      ========================================================== -->
+
+      <section class="view" id="view-sb">
+
+        <div class="page-heading">
+
+          <div>
+            <div class="eyebrow">TRADING CONTINUITY</div>
+
+            <h1>
+              Social Bond
+            </h1>
+
+            <p>
+              SB exists to reduce the waiting time between loss and continued
+              trading participation while recovery remains active.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="sb-status-card">
+
+          <div class="sb-status-main">
+
+            <div class="sb-icon">
+              ⇄
+            </div>
+
+            <div>
+
+              <span class="status-label">
+                CURRENT STATUS
+              </span>
+
+              <h2 id="sbStatus">
+                Not Activated
+              </h2>
+
+              <p id="sbDescription">
+                Trigger a qualifying loss to enter the recovery pathway.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="sb-action">
+
+            <button class="primary-btn" id="sbMainBtn">
+              Activate SB
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="sb-grid">
+
+          <div class="panel">
+
+            <div class="panel-header">
+              <h2>Continuity Pathway</h2>
+            </div>
+
+            <div class="sb-flow">
+
+              <div class="sb-flow-item">
+                <span>01</span>
+                <strong>Loss</strong>
+                <small>Qualifying drawdown</small>
+              </div>
+
+              <div class="sb-arrow">→</div>
+
+              <div class="sb-flow-item">
+                <span>02</span>
+                <strong>Recovery</strong>
+                <small>Original manager remains liable</small>
+              </div>
+
+              <div class="sb-arrow">→</div>
+
+              <div class="sb-flow-item">
+                <span>03</span>
+                <strong>SB</strong>
+                <small>Continuity pathway</small>
+              </div>
+
+              <div class="sb-arrow">→</div>
+
+              <div class="sb-flow-item">
+                <span>04</span>
+                <strong>New Manager</strong>
+                <small>Trading resumes</small>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="panel">
+
+            <div class="panel-header">
+              <h2>SB Participant Economics</h2>
+            </div>
+
+            <div class="economics-list">
+
+              <div>
+                <span>Facilitator/provider share</span>
+                <strong>8%</strong>
+              </div>
+
+              <div>
+                <span>Bonder share</span>
+                <strong>0.8%</strong>
+              </div>
+
+              <div>
+                <span>Recovery status</span>
+                <strong id="sbRecoveryStatus">Pending</strong>
+              </div>
+
+              <div>
+                <span>Trading continuity</span>
+                <strong id="sbTradingStatus">Not active</strong>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================================================
+           PARTICIPANTS
+      ========================================================== -->
+
+      <section class="view" id="view-participants">
+
+        <div class="page-heading">
+
+          <div>
+            <div class="eyebrow">PARTICIPATION</div>
+
+            <h1>
+              C&SB Participants
+            </h1>
+
+            <p>
+              Account participation does not automatically mean investing
+              capital into C&SB. Participants can acquire an account,
+              assign it, participate in the agreed economics and exit under
+              the applicable agreement.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="participant-grid">
+
+          <div class="participant-card">
+
+            <div class="participant-icon">C</div>
+
+            <h3>C&SB</h3>
+
+            <p>
+              Can provide accounts directly within the C&SB ecosystem.
+            </p>
+
+            <span class="participant-tag">
+              ACCOUNT SOURCE
+            </span>
+
+          </div>
+
+
+          <div class="participant-card">
+
+            <div class="participant-icon">T</div>
+
+            <h3>Trader / Individual</h3>
+
+            <p>
+              Can acquire a C&SB account and assign it to an eligible
+              participant under the applicable profit-sharing rules.
+            </p>
+
+            <span class="participant-tag">
+              OPTIONAL PARTICIPANT
+            </span>
+
+          </div>
+
+
+          <div class="participant-card">
+
+            <div class="participant-icon">P</div>
+
+            <h3>Partner</h3>
+
+            <p>
+              Approved partners may participate in account relationships
+              under separately agreed terms.
+            </p>
+
+            <span class="participant-tag">
+              PARTNER
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="participation-note">
+
+          <strong>
+            Participation ≠ investment in C&SB.
+          </strong>
+
+          <p>
+            In this simulation, an external participant acquires a C&SB
+            account for participation and may assign it to an eligible
+            manager. The participant's contractual rights, profit share,
+            recovery obligations and exit rights are recorded separately.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================================================
+           LEDGER
+      ========================================================== -->
+
+      <section class="view" id="view-ledger">
+
+        <div class="page-heading">
+
+          <div>
+            <div class="eyebrow">FINANCIAL INTEGRITY</div>
+
+            <h1>
+              Recovery Ledger
+            </h1>
+
+            <p>
+              Every recovery movement is recorded separately. The same
+              economic value cannot be counted twice.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="ledger-table-wrapper">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Reference</th>
+                <th>Case</th>
+                <th>Source</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Status</th>
+              </tr>
+
+            </thead>
+
+            <tbody id="ledgerBody"></tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+    </section>
+
+  </main>
+
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
 
   <script src="app.js"></script>
+
 </body>
 </html>
