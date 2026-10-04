@@ -1,3 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C&SB Prototype</title>
+<style>
+:root{--bg:#0f1417;--card:#182024;--line:#26323a;--text:#e8eef1;--mute:#93a3ad;--accent:#2fd39a;--warn:#f5a524;--bad:#ff6b6b}
+@media (prefers-color-scheme: light){:root{--bg:#f4f7f8;--card:#fff;--line:#dbe3e7;--text:#10181c;--mute:#5b6b75;--accent:#0a8f66;--warn:#b86e00;--bad:#c93a3a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:560px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:4px 0}
+h2{font-size:18px;margin:0 0 6px}
+p{margin:6px 0;color:var(--mute)}
+.tag{font-size:12px;color:var(--mute)}
+.steps{display:flex;gap:6px;margin:12px 0}
+.steps div{flex:1;height:5px;border-radius:3px;background:var(--line)}
+.steps div.on{background:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
+.row{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}
+.row b{font-variant-numeric:tabular-nums}
+button{font:inherit;border:0;border-radius:10px;padding:11px 14px;background:var(--accent);color:#04120d;font-weight:600;width:100%;margin-top:8px}
+button.alt{background:transparent;color:var(--text);border:1px solid var(--line)}
+button:disabled{opacity:.4}
+input[type=range]{width:100%}
+.bar{height:12px;border-radius:7px;background:var(--line);overflow:hidden;margin:8px 0}
+.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+.bar.red i{background:var(--bad)}
+.pill{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;border:1px solid var(--line);color:var(--mute)}
+.pill.ok{color:var(--accent);border-color:var(--accent)}
+.pill.bad{color:var(--bad);border-color:var(--bad)}
+.pill.warn{color:var(--warn);border-color:var(--warn)}
+label.ch{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);align-items:center}
+label.ch:last-child{border:0}
+.log{font:13px/1.5 ui-monospace,Menlo,monospace;color:var(--mute);white-space:pre-wrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.acct{border:1px solid var(--line);border-radius:10px;padding:10px;text-align:center}
+.note{font-size:13px;color:var(--mute)}
+.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="tag">C&SB PROTOTYPE</div>
+  <h1>Loss Recovery Without New Deposits</h1>
+  <p>An illustrative walkthrough. All numbers are examples and no real money moves.</p>
+  <div class="steps" id="steps"></div>
+  <div id="screen"></div>
+</div>
+
+<script>
+var S = {
+  step: 0,
+  plan: 'daily',
+  paid: 1000,
+  equity: 10000,
+  start: 10000,
+  sbOn: false,
+  ch: [
+    {n:'Original 50/50 account', v:1400, optin:false, on:true},
+    {n:'Own account managed by another', v:900, optin:false, on:true},
+    {n:'Received second account', v:650, optin:false, on:true},
+    {n:'Additional account 1', v:500, optin:false, on:true},
+    {n:'Additional account 2', v:420, optin:false, on:true},
+    {n:'Additional account 3', v:0, optin:false, on:true},
+    {n:'Additional account 4', v:0, optin:false, on:true},
+    {n:'Additional account 5', v:0, optin:false, on:true},
+    {n:'Referral earnings', v:380, optin:false, on:true},
+    {n:'SB earnings (opt in)', v:600, optin:true, on:false},
+    {n:'Bonder earnings (opt in)', v:350, optin:true, on:false}
+  ],
+  A: [], B: [], ledger: [], detached: false
+};
+var NAMES = ['Buy','Trade','Recovery','Network','Conflict'];
+
+function money(n){ return (n < 0 ? '-$' : '$') + Math.abs(Math.round(n)).toLocaleString('en-US'); }
+function el(id){ return document.getElementById(id); }
+
+function go(i){ S.step = i; render(); window.scrollTo(0,0); }
+
+function render(){
+  var s = '';
+  for (var i = 0; i < NAMES.length; i++) s += '<div class="' + (i <= S.step ? 'on' : '') + '"></div>';
+  el('steps').innerHTML = s;
+  var fn = [vBuy, vTrade, vRecovery, vNetwork, vConflict][S.step];
+  el('screen').innerHTML = fn();
+  if (S.step === 1) paintTrade();
+  if (S.step === 2) paintRecovery();
+}
+
+function nav(back, next, nextLabel){
+  var h = '';
+  if (next !== null) h += '<button onclick="go(' + next + ')">' + (nextLabel || 'Continue') + '</button>';
+  if (back !== null) h += '<button class="alt" onclick="go(' + back + ')">Back</button>';
+  return h;
+}
+
+/* 1 BUY */
+function vBuy(){
+  var fee = 100;
+  var plan = S.plan === 'daily'
+    ? 'Daily 1.1 percent for 100 days. Funding from day 30 to day 100.'
+    : 'Installments of 3 to 5 times depending on account type. Within 90 days.';
+  return '<div class="card"><h2>1. Capital Building</h2>' +
+    '<p>You buy a real funded account in installments, like buying something on payment plan.</p>' +
+    '<div class="row"><span>Account</span><b>$10,000</b></div>' +
+    '<div class="row"><span>Service fee, 1 percent</span><b>' + money(fee) + '</b></div>' +
+    '<div class="row"><span>Starting payment</span><b>$1,000</b></div>' +
+    '<div class="row"><span>Plan</span><b>' + (S.plan === 'daily' ? 'Daily' : 'Installments') + '</b></div>' +
+    '<p>' + plan + '</p>' +
+    '<button class="alt" onclick="S.plan=(S.plan===\'daily\'?\'inst\':\'daily\');render()">Switch payment plan</button>' +
+    '<p class="note">If the purchase is not completed, you are refunded less the service fee before issuance. After early issuance there is no standard refund.</p></div>' +
+    '<div class="card"><h2>Profit allocation</h2>' +
+    '<div class="row"><span>Account owner</span><b>35%</b></div>' +
+    '<div class="row"><span>Manager</span><b>35%</b></div>' +
+    '<div class="row"><span>Referrer</span><b>15%</b></div>' +
+    '<div class="row"><span>C&SB</span><b>15%</b></div></div>' +
+    nav(null, 1, 'Account issued, start trading');
+}
+
+/* 2 TRADE */
+function vTrade(){
+  return '<div class="card"><h2>2. Trading and the 50 percent trigger</h2>' +
+    '<p>Drag to move the account equity. At 50 percent drawdown the account enters Recovery Mode.</p>' +
+    '<input type="range" id="eq" min="3000" max="10000" step="100" value="' + S.equity + '" oninput="S.equity=+this.value;paintTrade()">' +
+    '<div class="row"><span>Equity</span><b id="eqv"></b></div>' +
+    '<div class="row"><span>Drawdown</span><b id="ddv"></b></div>' +
+    '<div class="bar red"><i id="ddbar"></i></div>' +
+    '<div id="state"></div></div>' +
+    '<div id="nextTrade"></div>';
+}
+function paintTrade(){
+  var dd = (S.start - S.equity) / S.start * 100;
+  el('eqv').textContent = money(S.equity);
+  el('ddv').textContent = dd.toFixed(0) + '%';
+  el('ddbar').style.width = Math.min(100, dd * 2) + '%';
+  var hit = dd >= 50;
+  el('state').innerHTML = hit
+    ? '<span class="pill bad">Recovery Mode</span> <span class="pill ok">SB eligible</span><p>The loss is now a recovery case against the responsible manager. Recovery does not have to stop you trading.</p>'
+    : '<span class="pill ok">Active</span>';
+  el('nextTrade').innerHTML = hit ? nav(0, 2, 'Open recovery case') : nav(0, null);
+}
+
+/* 3 RECOVERY */
+function vRecovery(){
+  var loss = S.start - S.equity;
+  var sb = S.start * 0.5;
+  var fee = sb * 0.2;
+  return '<div class="card"><h2>3. Two timelines</h2>' +
+    '<p>Recovery and trading continuity run in parallel.</p>' +
+    '<div class="row"><span>Loss to recover</span><b>' + money(loss) + '</b></div>' +
+    '<div class="bar"><i id="recbar"></i></div>' +
+    '<div class="row"><span>Recovered from eligible earnings</span><b id="recv"></b></div>' +
+    '<div class="row"><span>Still outstanding</span><b id="outv"></b></div>' +
+    '<button class="alt" onclick="addEarnings()">Realize more earnings</button></div>' +
+    '<div class="card"><h2>Social Bond bridge</h2>' +
+    '<p>A licensed facilitator provides the credit. C&SB is the platform and does not lend.</p>' +
+    '<div class="row"><span>SB amount</span><b>' + money(sb) + '</b></div>' +
+    '<div class="row"><span>Activation fee, 20 percent</span><b>' + money(fee) + '</b></div>' +
+    '<div class="row"><span>Facilitator, 40 percent of fee</span><b>' + money(fee * 0.4) + '</b></div>' +
+    '<div class="row"><span>10 Bonders, 40 percent of fee</span><b>' + money(fee * 0.4) + '</b></div>' +
+    '<div class="row"><span>Each Bonder, 0.8 percent</span><b>' + money(sb * 0.008) + '</b></div>' +
+    '<div class="row"><span>C&SB, 20 percent of fee</span><b>' + money(fee * 0.2) + '</b></div>' +
+    '<div class="row"><span>Withdrawal lien per Bonder, 10 percent for 30 days</span><b>' + money(sb * 0.1) + '</b></div>' +
+    '<p class="note">The lien restricts withdrawal only. Capital stays with the Bonder. It is enforced only if there is no withdrawal activity and recovery stalls.</p>' +
+    '<button onclick="S.sbOn=!S.sbOn;render()">' + (S.sbOn ? 'SB active, trading continues' : 'Activate SB') + '</button></div>' +
+    nav(1, 3, 'See the recovery network');
+}
+function eligibleTotal(){
+  var t = 0;
+  S.ch.forEach(function(c){ if (c.on) t += c.v; });
+  return t;
+}
+function paintRecovery(){
+  var loss = S.start - S.equity;
+  var rec = Math.min(loss, eligibleTotal());
+  el('recbar').style.width = (loss ? rec / loss * 100 : 0) + '%';
+  el('recv').textContent = money(rec);
+  el('outv').textContent = money(Math.max(0, loss - rec));
+}
+function addEarnings(){
+  S.ch.forEach(function(c){ if (c.on) c.v += Math.round(150 + Math.random() * 350); });
+  paintRecovery();
+}
+
+/* 4 NETWORK */
+function vNetwork(){
+  var h = '<div class="card"><h2>4. Eleven recovery channels</h2>' +
+    '<p>These are channels, not cash. Only eligible, realized and contractually interceptable earnings count, and nothing is counted twice. All eligible earnings go to recovery at once.</p>';
+  S.ch.forEach(function(c, i){
+    var tag = c.optin ? (c.on ? '<span class="pill ok">consented</span>' : '<span class="pill warn">not opted in</span>')
+                      : (c.v === 0 ? '<span class="pill">no account yet</span>' : '<span class="pill ok">eligible</span>');
+    h += '<label class="ch"><span>' + (i + 1) + '. ' + c.n + '<br>' + tag + '</span>' +
+         '<span><b>' + money(c.v) + '</b> ' +
+         (c.optin ? '<input type="checkbox" ' + (c.on ? 'checked' : '') + ' onchange="S.ch[' + i + '].on=this.checked;render()">' : '') +
+         '</span></label>';
+  });
+  var loss = S.start - S.equity;
+  var t = eligibleTotal();
+  h += '<div class="row"><span>Eligible total</span><b>' + money(t) + '</b></div>' +
+       '<div class="row"><span>Applied to recovery</span><b>' + money(Math.min(loss, t)) + '</b></div></div>' +
+       '<p class="note">The five additional slots fill gradually as the ecosystem supplies accounts. Each one goes to a different sub manager who runs their own C&SB lifecycle.</p>' +
+       nav(2, 4, 'Test the anti conflict rule');
+  return h;
+}
+
+/* 5 CONFLICT */
+function vConflict(){
+  var h = '<div class="card"><h2>5. Two account rule</h2>' +
+    '<p>A user may take part in two relevant accounts. Identical pairs cannot be open on both at the same time.</p>' +
+    '<div class="grid2">' +
+      '<div class="acct"><b>Account A</b><br>' + (S.A.length ? S.A.join(', ') : 'no trades') + '</div>' +
+      '<div class="acct"><b>Account B</b><br>' + (S.detached ? '<span class="pill bad">detached</span>' : (S.B.length ? S.B.join(', ') : 'no trades')) + '</div>' +
+    '</div>' +
+    '<button class="alt" onclick="openA()">Open EUR/USD on A</button>' +
+    '<button class="alt" onclick="openB(\'GBP/USD\')">Open GBP/USD on B</button>' +
+    '<button class="alt" onclick="openB(\'EUR/USD\',-12450)">Open EUR/USD on B, floating loss</button>' +
+    '<button class="alt" onclick="openB(\'EUR/USD\',8200)">Open EUR/USD on B, floating profit</button>' +
+    '<button class="alt" onclick="resetConflict()">Reset</button></div>' +
+    '<div class="card"><h2>Audit and recovery ledger</h2><div class="log">' +
+    (S.ledger.length ? S.ledger.join('\n') : 'No events yet.') + '</div></div>' +
+    '<p class="note">In production this is server side and event driven. The broker or exchange execution layer is authoritative for real positions. This page only shows the idea.</p>' +
+    nav(3, 0, 'Start again');
+  return h;
+}
+function openA(){
+  if (S.A.indexOf('EUR/USD') < 0) { S.A.push('EUR/USD'); S.ledger.push('A opened EUR/USD'); }
+  render();
+}
+function openB(pair, floating){
+  if (S.detached) { S.ledger.push('B is detached, no action'); render(); return; }
+  if (S.A.indexOf(pair) >= 0) {
+    S.ledger.push('Conflict on ' + pair + ', trade terminated');
+    S.detached = true;
+    S.ledger.push('Sub account relationship detached');
+    if (floating < 0) S.ledger.push('Floating ' + money(floating) + ', recovery triggered now');
+    else if (floating > 0) S.ledger.push('Floating +' + money(floating) + ', manager entitlement is $0');
+    else S.ledger.push('Floating result unknown');
+  } else {
+    S.B.push(pair);
+    S.ledger.push('B opened ' + pair + ', no conflict');
+  }
+  render();
+}
+function resetConflict(){ S.A = []; S.B = []; S.ledger = []; S.detached = false; render(); }
+
+render();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
 <!doctype html>
 <html lang="en">
 <head>
