@@ -137,7 +137,7 @@ input[type=range]{width:100%;accent-color:#C9972B;padding:0;border:none;backgrou
   <div style="height:14px"></div>
   <div class="section-header"><div class="sh-title">Welcome to the C&amp;SB prototype</div><div class="sh-sub">Walk through each tab in order. Every tab lets you do something and see the result straight away.</div></div>
   <div class="card"><h3>The core idea</h3>
-   <div class="explain"><b>Loss recovery without new deposits</b>When a trader loses half an account, the usual answer is simple. The account is gone and the trader must find new money or walk away.<br/><br/>C&amp;SB changes that answer. The loss becomes a recovery case that is paid back from money the responsible manager already earns inside the network. A Social Bond can let trading continue while that happens.<br/><br/>Everything else in C&amp;SB is a feature that serves this one purpose.<i>Why it matters. A trader does not lose the whole relationship because one account failed.</i></div>
+   <div class="explain"><b>Loss recovery without new deposits</b>When a trader loses half an account, the usual answer is simple. The trader carries the loss alone, keeps trading what is left and tries to win it back, or adds new money.<br/><br/>C&amp;SB changes that answer. The loss becomes a recovery case, and all of the responsible manager's eligible earnings inside the network go to paying it back at once. A Social Bond can let trading continue while that happens.<br/><br/>Everything else in C&amp;SB is a feature that serves this one purpose.<i>Why it matters. A trader does not lose the whole relationship because one account failed.</i></div>
   </div>
   <div class="card"><h3>What you will see</h3>
    <div class="step"><span class="ic">🛒</span><div><strong>Buy (CB)</strong>Buy a funded account in instalments instead of paying all at once.</div></div>
@@ -241,12 +241,12 @@ input[type=range]{width:100%;accent-color:#C9972B;padding:0;border:none;backgrou
   <div class="card" style="padding:10px">
    <table>
     <tr><th></th><th>Usual path</th><th>C&amp;SB path</th></tr>
-    <tr><td>After a 50% loss</td><td class="them">Account is lost</td><td class="us">Recovery case opens</td></tr>
-    <tr><td>Money needed</td><td class="them">New deposit</td><td class="us">None, earnings are used</td></tr>
+    <tr><td>After a 50% loss</td><td class="them">Trader carries it alone</td><td class="us">Recovery case opens</td></tr>
+    <tr><td>Money needed</td><td class="them">New deposit, or win it back</td><td class="us">None, earnings are used</td></tr>
     <tr><td>Who pays it back</td><td class="them">The trader alone</td><td class="us">The manager of that account</td></tr>
-    <tr><td>Keep trading</td><td class="them">Only with new money</td><td class="us">Through a Social Bond</td></tr>
+    <tr><td>Keep trading</td><td class="them">On what is left</td><td class="us">Through a Social Bond</td></tr>
     <tr><td>Lender</td><td class="them">Hard to find</td><td class="us">Licensed provider, routed by C&amp;SB</td></tr>
-    <tr><td>Relationship</td><td class="them">Usually ends</td><td class="us">Stays active</td></tr>
+    <tr><td>Relationship</td><td class="them">Often ends</td><td class="us">Stays active</td></tr>
    </table>
   </div>
   <div class="info i-gold">Recovery depends on real, realized earnings and on signed consent. It is not guaranteed money. The legal basis still needs review by qualified counsel.</div>
@@ -424,19 +424,17 @@ function recCards(a,r){
     const on=c.on(),x=r.ch[i];
     h+='<div class="ch'+(on?'':' off')+'"><input type="checkbox" '+(x.consent&&on?'checked':'')+(on?'':' disabled')+' onchange="toggleCh('+i+',this.checked)"/><span class="n">'+(i+1)+'. '+c.n+'</span><span class="a">'+(on?(x.applied>0?money(x.applied):'$0.00'):'no account yet')+'</span></div>';
   });
-  h+='<div class="input-group" style="margin-top:12px"><label>Share of eligible earnings applied, '+r.pct+'%</label><input type="range" min="10" max="100" step="10" value="'+r.pct+'" oninput="r_pct(this.value)"/></div>'+
-   '<div class="info i-blue">The share is set by the signed agreement. Here you can try different shares.</div>'+
-   '<button class="btn btn-green" onclick="runRound()">Run one month of earnings →</button></div>';
+  h+='<div class="info i-gold" style="margin-top:12px">All eligible earnings go to recovery at once, until the loss is repaid. The earning amounts here are examples, not real figures.</div>'+
+   '<button class="btn btn-green" onclick="runRound()">Run one month of example earnings →</button></div>';
   return h;
 }
 function toggleCh(i,v){S.rec[S.sel].ch[i].consent=v;}
-function r_pct(v){S.rec[S.sel].pct=+v;renderRecovery();}
 function triggerDD(){
   const a=selAcc();
   runSteps(['Reading broker equity','Equity is down 50 percent','Opening the recovery case'],()=>{
-    S.rec[a.id]={amount:a.size*.5,recovered:0,pct:50,ch:chDefs().map(c=>({consent:c.d,applied:0}))};
+    S.rec[a.id]={amount:a.size*.5,recovered:0,pct:100,ch:chDefs().map(c=>({consent:c.d,applied:0}))};
     led('Drawdown','50% drawdown on '+a.id+', manager '+a.manager,-a.size*.5,a.id);
-    showDone('RECOVERY MODE',a.id,[['Loss to recover',money(a.size*.5)],['Responsible manager',a.manager],['Next','Run earnings, or open a Social Bond']]);
+    showDone('RECOVERY MODE',a.id,[['Loss to recover',money(a.size*.5)],['Responsible manager',a.manager],['Next','Run example earnings, or open a Social Bond']]);
   });
 }
 function runRound(){
